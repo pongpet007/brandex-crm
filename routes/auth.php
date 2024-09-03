@@ -19,6 +19,7 @@ Route::middleware('guest')->group(function () {
 });
 
 Route::middleware('auth')->group(function () {
+
     Volt::route('verify-email', 'pages.auth.verify-email')
         ->name('verification.notice');
 
@@ -28,4 +29,5 @@ Route::middleware('auth')->group(function () {
 
     Volt::route('confirm-password', 'pages.auth.confirm-password')
         ->name('password.confirm');
+        
 });
