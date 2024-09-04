@@ -39,8 +39,8 @@ if (document.getElementById('layout-menu')) {
       showDropdownOnHover: localStorage.getItem('templateCustomizer-' + templateName + '--ShowDropdownOnHover') // If value(showDropdownOnHover) is set in local storage
         ? localStorage.getItem('templateCustomizer-' + templateName + '--ShowDropdownOnHover') === 'true' // Use the local storage value
         : window.templateCustomizer !== undefined // If value is set in config.js
-        ? window.templateCustomizer.settings.defaultShowDropdownOnHover // Use the config.js value
-        : true // Use this if you are not using the config.js and want to set value directly from here
+          ? window.templateCustomizer.settings.defaultShowDropdownOnHover // Use the config.js value
+          : true // Use this if you are not using the config.js and want to set value directly from here
     });
     // Change parameter to true if you want scroll animation
     window.Helpers.scrollToActive((animate = false));
@@ -66,7 +66,7 @@ if (document.getElementById('layout-menu')) {
             let layoutCollapsedVal = window.Helpers.isCollapsed() ? 'collapsed' : 'expanded';
             layoutCollapsedCustomizerOptions.querySelector(`input[value="${layoutCollapsedVal}"]`).click();
           }
-        } catch (e) {}
+        } catch (e) { }
       }
     });
   });
@@ -123,6 +123,7 @@ if (document.getElementById('layout-menu')) {
   // Set style on click of style switcher item if template customizer is enabled
   if (window.templateCustomizer && styleSwitcher) {
     let styleSwitcherItems = [].slice.call(styleSwitcher.children[1].querySelectorAll('.dropdown-item'));
+
     styleSwitcherItems.forEach(function (item) {
       item.addEventListener('click', function () {
         let currentStyle = this.getAttribute('data-theme');
@@ -136,10 +137,12 @@ if (document.getElementById('layout-menu')) {
       });
     });
 
+
     // Update style switcher icon based on the stored style
 
     const styleSwitcherIcon = styleSwitcher.querySelector('i');
-
+    // console.log(styleSwitcherIcon);
+    styleSwitcherIcon.classList.remove("ti-sun");
     if (storedStyle === 'light') {
       styleSwitcherIcon.classList.add('ti-sun');
       new bootstrap.Tooltip(styleSwitcherIcon, {
@@ -164,81 +167,81 @@ if (document.getElementById('layout-menu')) {
   // Run switchImage function based on the stored style
   switchImage(storedStyle);
 
-  // Internationalization (Language Dropdown)
-  // ---------------------------------------
+  // // Internationalization (Language Dropdown)
+  // // ---------------------------------------
 
-  if (typeof i18next !== 'undefined' && typeof i18NextHttpBackend !== 'undefined') {
-    i18next
-      .use(i18NextHttpBackend)
-      .init({
-        lng: window.templateCustomizer ? window.templateCustomizer.settings.lang : 'en',
-        debug: false,
-        fallbackLng: 'en',
-        backend: {
-          loadPath: assetsPath + 'json/locales/{{lng}}.json'
-        },
-        returnObjects: true
-      })
-      .then(function (t) {
-        localize();
-      });
-  }
+  // if (typeof i18next !== 'undefined' && typeof i18NextHttpBackend !== 'undefined') {
+  //   i18next
+  //     .use(i18NextHttpBackend)
+  //     .init({
+  //       lng: window.templateCustomizer ? window.templateCustomizer.settings.lang : 'en',
+  //       debug: false,
+  //       fallbackLng: 'en',
+  //       backend: {
+  //         loadPath: assetsPath + 'json/locales/{{lng}}.json'
+  //       },
+  //       returnObjects: true
+  //     })
+  //     .then(function (t) {
+  //       localize();
+  //     });
+  // }
 
-  let languageDropdown = document.getElementsByClassName('dropdown-language');
+  // let languageDropdown = document.getElementsByClassName('dropdown-language');
 
-  if (languageDropdown.length) {
-    let dropdownItems = languageDropdown[0].querySelectorAll('.dropdown-item');
+  // if (languageDropdown.length) {
+  //   let dropdownItems = languageDropdown[0].querySelectorAll('.dropdown-item');
 
-    for (let i = 0; i < dropdownItems.length; i++) {
-      dropdownItems[i].addEventListener('click', function () {
-        let currentLanguage = this.getAttribute('data-language');
-        let textDirection = this.getAttribute('data-text-direction');
+  //   for (let i = 0; i < dropdownItems.length; i++) {
+  //     dropdownItems[i].addEventListener('click', function () {
+  //       let currentLanguage = this.getAttribute('data-language');
+  //       let textDirection = this.getAttribute('data-text-direction');
 
-        for (let sibling of this.parentNode.children) {
-          var siblingEle = sibling.parentElement.parentNode.firstChild;
+  //       for (let sibling of this.parentNode.children) {
+  //         var siblingEle = sibling.parentElement.parentNode.firstChild;
 
-          // Loop through each sibling and push to the array
-          while (siblingEle) {
-            if (siblingEle.nodeType === 1 && siblingEle !== siblingEle.parentElement) {
-              siblingEle.querySelector('.dropdown-item').classList.remove('active');
-            }
-            siblingEle = siblingEle.nextSibling;
-          }
-        }
-        this.classList.add('active');
+  //         // Loop through each sibling and push to the array
+  //         while (siblingEle) {
+  //           if (siblingEle.nodeType === 1 && siblingEle !== siblingEle.parentElement) {
+  //             siblingEle.querySelector('.dropdown-item').classList.remove('active');
+  //           }
+  //           siblingEle = siblingEle.nextSibling;
+  //         }
+  //       }
+  //       this.classList.add('active');
 
-        i18next.changeLanguage(currentLanguage, (err, t) => {
-          window.templateCustomizer ? window.templateCustomizer.setLang(currentLanguage) : '';
-          directionChange(textDirection);
-          if (err) return console.log('something went wrong loading', err);
-          localize();
-        });
-      });
-    }
-    function directionChange(textDirection) {
-      if (textDirection === 'rtl') {
-        if (localStorage.getItem('templateCustomizer-' + templateName + '--Rtl') !== 'true')
-          window.templateCustomizer ? window.templateCustomizer.setRtl(true) : '';
-      } else {
-        if (localStorage.getItem('templateCustomizer-' + templateName + '--Rtl') === 'true')
-          window.templateCustomizer ? window.templateCustomizer.setRtl(false) : '';
-      }
-    }
-  }
+  //       i18next.changeLanguage(currentLanguage, (err, t) => {
+  //         window.templateCustomizer ? window.templateCustomizer.setLang(currentLanguage) : '';
+  //         directionChange(textDirection);
+  //         if (err) return console.log('something went wrong loading', err);
+  //         localize();
+  //       });
+  //     });
+  //   }
+  //   function directionChange(textDirection) {
+  //     if (textDirection === 'rtl') {
+  //       if (localStorage.getItem('templateCustomizer-' + templateName + '--Rtl') !== 'true')
+  //         window.templateCustomizer ? window.templateCustomizer.setRtl(true) : '';
+  //     } else {
+  //       if (localStorage.getItem('templateCustomizer-' + templateName + '--Rtl') === 'true')
+  //         window.templateCustomizer ? window.templateCustomizer.setRtl(false) : '';
+  //     }
+  //   }
+  // }
 
-  function localize() {
-    let i18nList = document.querySelectorAll('[data-i18n]');
-    // Set the current language in dd
-    let currentLanguageEle = document.querySelector('.dropdown-item[data-language="' + i18next.language + '"]');
+  // function localize() {
+  //   let i18nList = document.querySelectorAll('[data-i18n]');
+  //   // Set the current language in dd
+  //   let currentLanguageEle = document.querySelector('.dropdown-item[data-language="' + i18next.language + '"]');
 
-    if (currentLanguageEle) {
-      currentLanguageEle.click();
-    }
+  //   if (currentLanguageEle) {
+  //     currentLanguageEle.click();
+  //   }
 
-    i18nList.forEach(function (item) {
-      item.innerHTML = i18next.t(item.dataset.i18n);
-    });
-  }
+  //   i18nList.forEach(function (item) {
+  //     item.innerHTML = i18next.t(item.dataset.i18n);
+  //   });
+  // }
 
   // Notification
   // ------------
@@ -389,7 +392,7 @@ if (document.getElementById('layout-menu')) {
             localStorage.getItem('templateCustomizer-' + templateName + '--LayoutCollapsed') === 'true',
             false
           );
-      } catch (e) {}
+      } catch (e) { }
     }
   }
 })();

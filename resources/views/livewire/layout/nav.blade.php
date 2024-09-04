@@ -27,11 +27,47 @@ $logout = function (Logout $logout) {
                 <i class="ti ti-menu-2 ti-sm"></i>
             </a>
         </div>
+        <div>
+            <ul class="menu-inner">
+                <!-- Dashboards -->
+                <li class="menu-item pe-3">
+                    <a href="{{ url('lead') }}" class="menu-link menu-toggle">
+                        <i class="menu-icon tf-icons ti ti-confetti"></i>
+                        <div data-i18n="Leads">Leads</div>
+                    </a>
+                </li>
+                <li class="menu-item pe-3">
+                    <a href="{{url("order")}}" class="menu-link menu-toggle">
+                        <i class="menu-icon tf-icons ti ti-truck-delivery"></i>
+                        <div data-i18n="Orders">Orders</div>
+                    </a>
+                </li>
+                <li class="menu-item pe-3">
+                    <a href="{{url('customer')}}" class="menu-link menu-toggle">
+                        <i class="menu-icon tf-icons ti ti-users-plus"></i>
+                        <div data-i18n="Customer">Customer</div>
+                    </a>
+                </li>
+                <li class="menu-item pe-3">
+                    <a href="{{url('quotation')}}" class="menu-link menu-toggle">
+                        <i class="menu-icon tf-icons ti ti-checks"></i>
+                        <div data-i18n="Approve Quotation">Approve Quotation</div>
+                    </a>
+                </li>
+                <li class="menu-item pe-3">
+                    <a href="{{url('setting')}}" class="menu-link menu-toggle">
+                        <i class="menu-icon tf-icons ti ti-settings"></i>
+                        <div data-i18n="Setting">Setting</div>
+                    </a>
+                </li>
+            </ul>
+        </div>
+
 
         <div class="navbar-nav-right d-flex align-items-center" id="navbar-collapse">
             <ul class="navbar-nav flex-row align-items-center ms-auto">
-                {{-- 
-                <!-- Language -->
+                
+                {{-- <!-- Language -->
                 <li class="nav-item dropdown-language dropdown me-2 me-xl-0">
                     <a class="nav-link dropdown-toggle hide-arrow" href="javascript:void(0);" data-bs-toggle="dropdown">
                         <i class="ti ti-language rounded-circle ti-md"></i>
@@ -63,21 +99,21 @@ $logout = function (Logout $logout) {
                         </li>
                     </ul>
                 </li>
-                <!--/ Language -->
-                --}}
+                <!--/ Language --> --}}
+               
 
-                <!-- Search -->
+                {{-- <!-- Search -->
                 <li class="nav-item navbar-search-wrapper me-2 me-xl-0">
                     <a class="nav-link search-toggler" href="javascript:void(0);">
                         <i class="ti ti-search ti-md"></i>
                     </a>
                 </li>
-                <!-- /Search -->
+                <!-- /Search --> --}}
 
                 <!-- Style Switcher -->
                 <li class="nav-item dropdown-style-switcher dropdown me-2 me-xl-0">
                     <a class="nav-link dropdown-toggle hide-arrow" href="javascript:void(0);" data-bs-toggle="dropdown">
-                        <i class="ti ti-md"></i>
+                      <i class="ti ti-sun"></i>
                     </a>
                     <ul class="dropdown-menu dropdown-menu-end dropdown-styles">
                         <li>
@@ -98,8 +134,8 @@ $logout = function (Logout $logout) {
                     </ul>
                 </li>
                 <!-- / Style Switcher-->
-                {{-- 
-                <!-- Quick links  -->
+               
+                {{-- <!-- Quick links  -->
                 <li class="nav-item dropdown-shortcuts navbar-dropdown dropdown me-2 me-xl-0">
                     <a class="nav-link dropdown-toggle hide-arrow" href="javascript:void(0);" data-bs-toggle="dropdown"
                         data-bs-auto-close="outside" aria-expanded="false">
@@ -183,13 +219,12 @@ $logout = function (Logout $logout) {
                         </div>
                     </div>
                 </li>
-                <!-- Quick links -->
-                --}}
-
+                <!-- Quick links --> --}}
+               
                 <!-- Notification -->
                 <li class="nav-item dropdown-notifications navbar-dropdown dropdown me-3 me-xl-1">
-                    <a class="nav-link dropdown-toggle hide-arrow" href="javascript:void(0);"
-                        data-bs-toggle="dropdown" data-bs-auto-close="outside" aria-expanded="false">
+                    <a class="nav-link dropdown-toggle hide-arrow" href="javascript:void(0);" data-bs-toggle="dropdown"
+                        data-bs-auto-close="outside" aria-expanded="false">
                         <i class="ti ti-bell ti-md"></i>
                         <span class="badge bg-danger rounded-pill badge-notifications">5</span>
                     </a>
@@ -208,8 +243,7 @@ $logout = function (Logout $logout) {
                                     <div class="d-flex">
                                         <div class="flex-shrink-0 me-3">
                                             <div class="avatar">
-                                                <img src="assets/img/avatars/1.png" alt
-                                                    class="h-auto rounded-circle" />
+                                                <img src="assets/img/avatars/1.png" alt class="h-auto rounded-circle" />
                                             </div>
                                         </div>
                                         <div class="flex-grow-1">
@@ -480,7 +514,7 @@ $logout = function (Logout $logout) {
                             <div class="dropdown-divider"></div>
                         </li>
                         <li>
-                            <a class="dropdown-item" wire:click="logout" >
+                            <a class="dropdown-item" wire:click="logout">
                                 <i class="ti ti-logout me-2 ti-sm"></i>
                                 <span class="align-middle">Log Out</span>
                             </a>

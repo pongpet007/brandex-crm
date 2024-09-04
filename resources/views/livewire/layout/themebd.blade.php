@@ -42,10 +42,19 @@
     <!-- Helpers -->
     <script src="assets/vendor/js/helpers.js"></script>
     <!--! Template customizer & Theme config files MUST be included after core stylesheets and helpers.js in the <head> section -->
-
+    <script src="assets/vendor/js/template-customizer.js"></script>
 
     <!--? Config:  Mandatory theme config file contain global vars & default theme options, Set your preferred theme option in this file.  -->
     <script src="assets/js/config.js"></script>
+    <style>
+        .text-white {
+            color: white;
+        }
+
+        .text-black {
+            color: black;
+        }
+    </style>
 </head>
 
 <body>
@@ -61,7 +70,7 @@
                 <!-- Content wrapper -->
                 <div class="content-wrapper">
                     <!-- Menu -->
-                    <livewire:layout.menu />
+                    {{-- <livewire:layout.menu /> --}}
                     <!-- / Menu -->
 
                     <!-- Content -->
@@ -108,8 +117,9 @@
     <!-- Core JS -->
     <!-- build:js assets/vendor/js/core.js -->
     <script src="assets/vendor/libs/jquery/jquery.js"></script>
-    <script src="assets/vendor/libs/popper/popper.js"></script>
     <script src="assets/vendor/js/bootstrap.js"></script>
+
+    <script src="assets/vendor/libs/popper/popper.js"></script>
     <script src="assets/vendor/libs/node-waves/node-waves.js"></script>
     <script src="assets/vendor/libs/perfect-scrollbar/perfect-scrollbar.js"></script>
     <script src="assets/vendor/libs/hammer/hammer.js"></script>
@@ -126,7 +136,7 @@
 
     <!-- Page JS -->
     @stack('scripts')
-    
+
 </body>
 
 </html>
