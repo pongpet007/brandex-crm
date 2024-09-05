@@ -9,6 +9,7 @@ $logout = function (Logout $logout) {
 };
 
 ?>
+
 <nav class="layout-navbar navbar navbar-expand-xl align-items-center bg-navbar-theme" id="layout-navbar">
     <div class="container-fluid">
         <div class="navbar-brand app-brand demo d-none d-xl-flex py-0 me-4">
@@ -36,12 +37,12 @@ $logout = function (Logout $logout) {
                         <div data-i18n="Leads">Leads</div>
                     </a>
                 </li>
-                <li class="menu-item pe-3">
+                {{-- <li class="menu-item pe-3">
                     <a href="{{url("order")}}" class="menu-link menu-toggle">
                         <i class="menu-icon tf-icons ti ti-truck-delivery"></i>
                         <div data-i18n="Orders">Orders</div>
                     </a>
-                </li>
+                </li> --}}
                 <li class="menu-item pe-3">
                     <a href="{{url('customer')}}" class="menu-link menu-toggle">
                         <i class="menu-icon tf-icons ti ti-users-plus"></i>
@@ -52,6 +53,12 @@ $logout = function (Logout $logout) {
                     <a href="{{url('quotation')}}" class="menu-link menu-toggle">
                         <i class="menu-icon tf-icons ti ti-checks"></i>
                         <div data-i18n="Approve Quotation">Approve Quotation</div>
+                    </a>
+                </li>
+                <li class="menu-item pe-3">
+                    <a href="{{url('product')}}" class="menu-link menu-toggle">
+                        <i class="menu-icon tf-icons ti ti-gift"></i>
+                        <div data-i18n="Product">Product</div>
                     </a>
                 </li>
                 <li class="menu-item pe-3">
@@ -532,4 +539,19 @@ $logout = function (Logout $logout) {
             <i class="ti ti-x ti-sm search-toggler cursor-pointer"></i>
         </div>
     </div>
+    <style>
+        .dark-style .menu-inner .menu-item a{
+            color: white;
+        }
+        .dark-style .menu-inner .menu-item a:hover{
+            color: yellow;
+        }
+
+        .menu-inner .menu-item a{
+            color: black;
+        }
+        .menu-inner .menu-item a:hover{
+            color: rgb(57, 57, 57);
+        }
+    </style>
 </nav>

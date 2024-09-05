@@ -6,7 +6,7 @@
                 <div class="card-header d-flex align-items-center justify-content-between p-3"
                     style="background-color: rgba(217, 217, 217, 0.923)">
                     <div class="card-title mb-0">
-                        <a href="{{url('quotation-form')}}" class="btn btn-primary">Create Quotation</a>
+                        <a href="{{url('product-form')}}" class="btn btn-primary">Create Product</a>
                     </div>
                     <div class="dropdown d-none">
                         <button class="btn p-0" type="button" id="routeVehicles" data-bs-toggle="dropdown"
@@ -27,6 +27,7 @@
                             <th class="text-black">Product name</th>
                             <th class="text-black">Detail</th>
                             <th class="text-black">Price</th>
+                            <th class="text-black">IS Active</th>
                         </tr>
                         <tr>
                             <td>xxx</td>
@@ -35,6 +36,7 @@
                             </td>
                             <td>xxx</td>
                             <td>100,000</td>
+                            <td>Active</td>
                         </tr>
                     </table>
                     <div class="p-3">

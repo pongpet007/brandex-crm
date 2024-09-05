@@ -6,6 +6,8 @@ use App\Livewire\Crm\LeadForm;
 use App\Livewire\Crm\LeadShow;
 use App\Livewire\Crm\OrderForm;
 use App\Livewire\Crm\OrderShow;
+use App\Livewire\Crm\ProductForm;
+use App\Livewire\Crm\ProductShow;
 use App\Livewire\Crm\QuotationForm;
 use App\Livewire\Crm\QuotationShow;
 use App\Livewire\Crm\SettingForm;
@@ -40,6 +42,9 @@ Route::middleware('auth')->group(function () {
 
     Route::get('/quotation', QuotationShow::class);
     Route::get('/quotation-form', QuotationForm::class);
+
+    Route::get('/product', ProductShow::class);
+    Route::get('/product-form', ProductForm::class);
 
     Route::get('/setting', SettingForm::class);
     
