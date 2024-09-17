@@ -1,5 +1,6 @@
 <?php
 
+use App\Livewire\Crm\Calendar;
 use App\Livewire\Crm\CustomerForm;
 use App\Livewire\Crm\CustomerShow;
 use App\Livewire\Crm\LeadForm;
@@ -11,12 +12,12 @@ use App\Livewire\Crm\ProductShow;
 use App\Livewire\Crm\QuotationForm;
 use App\Livewire\Crm\QuotationShow;
 use App\Livewire\Crm\SettingForm;
-use App\Livewire\Customer;
-use App\Livewire\Test;
+use App\Livewire\Crm\UsersForm;
+use App\Livewire\Crm\UsersShow;
 use Illuminate\Support\Facades\Route;
 
 // Route::view('/', 'welcome');
-Route::redirect('/', 'customer');
+Route::redirect('/', 'lead');
 
 Route::view('dashboard', 'dashboard')
     ->middleware(['auth', 'verified'])
@@ -28,9 +29,9 @@ Route::view('profile', 'profile')
 
 Route::middleware('auth')->group(function () {
 
-    // Route::get('/test',Test::class);
-    // Route::get('/customer',Customer::class);
-
+    Route::get('/calendar',Calendar::class);
+    Route::get('/setting', SettingForm::class);
+    
     Route::get('/lead', LeadShow::class);
     Route::get('/lead-form', LeadForm::class);
 
@@ -46,7 +47,9 @@ Route::middleware('auth')->group(function () {
     Route::get('/product', ProductShow::class);
     Route::get('/product-form', ProductForm::class);
 
-    Route::get('/setting', SettingForm::class);
+    Route::get('/users', UsersShow::class);
+    Route::get('/users-form', UsersForm::class);
+
     
 });
 

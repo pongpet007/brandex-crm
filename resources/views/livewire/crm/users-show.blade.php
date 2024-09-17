@@ -1,18 +1,17 @@
 <div class="container">
-
-    <div class="row">
+   
+    <div class="row">  
         <div class="col-12 order-5">
             <div class="card">
                 <div class="card-header d-flex align-items-center justify-content-between p-3"
                     style="background-color: rgba(217, 217, 217, 0.923)">
                     <div class="card-title mb-0">
                         <div class="d-flex">
-                            <div class="me-3">
-                                <a href="{{ url('product-form') }}" class="btn btn-primary">Create Product</a>
-                            </div>
-                            <div>
-                                <input type="text" placeholder="Search Product" class="form-control">
-                            </div>
+                            <div class="me-3"> <a href="{{url('users-form')}}" class="btn btn-primary">Create User</a></div>
+
+                            <div><input type="text" placeholder="Search" class="form-control"></div>
+                           
+                            
                         </div>
                     </div>
                     <div class="dropdown d-none">
@@ -20,28 +19,31 @@
                             aria-haspopup="true" aria-expanded="false">
                             <i class="ti ti-dots-vertical"></i>
                         </button>
-                        <div class="dropdown-menu dropdown-menu-end" aria-labelledby="routeVehicles">
+                        {{-- <div class="dropdown-menu dropdown-menu-end" aria-labelledby="routeVehicles">
                             <a class="dropdown-item" href="javascript:void(0);">Select All</a>
                             <a class="dropdown-item" href="javascript:void(0);">Refresh</a>
                             <a class="dropdown-item" href="javascript:void(0);">Share</a>
-                        </div>
+                        </div> --}}
                     </div>
                 </div>
                 <div class="card-datatable table-responsive">
                     <table class="dt-route-vehicles table table-hover">
-                        <tr>                          
-                            <th class="text-black">Product name</th>
-                            <th class="text-black">Detail</th>
-                            <th class="text-black">Price</th>
-                            <th class="text-black">IS Active</th>
+                        <tr>
+                            <th class="text-black">Fullname</th>
+                            <th class="text-black">Username</th>
+                            <th class="text-black">is admin</th>
+                            <th class="text-black">is Active</th>
+                            <th class="text-black">Action</th>
+                            
                         </tr>
-                        <tr>                            
-                            <td>
-                                <div style="color: black">xxx</div>
-                            </td>
+                        <tr>                         
                             <td>xxx</td>
-                            <td>100,000</td>
+                            <td>xxx</td>
+                            <td>xxx</td>                            
                             <td>Active</td>
+                            <td>
+                                <a href="" class="btn btn-warning">edit</a>                                
+                            </td>
                         </tr>
                     </table>
                     <div class="p-3">

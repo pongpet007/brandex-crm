@@ -2,32 +2,41 @@
     <div class="row">
         <div class="col-6">
             <div class="card">
-                <div
-                    class="card-header sticky-element d-flex justify-content-sm-between align-items-sm-center flex-column flex-sm-row">
-                    <h5 class="card-title mb-sm-0 me-2 text-warning">Product edit</h5>
+                <div class="card-header sticky-element d-flex justify-content-sm-between align-items-sm-center flex-column flex-sm-row">
+                    <h5 class="card-title mb-sm-0 me-2 text-warning">User edit</h5>
                     {{-- <div class="action-btns">
                         <button class="btn btn-success">SAVE</button>
                     </div> --}}
                 </div>
                 <div class="card-body">
                     <div class="row">
-                        <form method="POST" action="" enctype="multipart/form-data">                           
+                        <form method="POST" action="" enctype="multipart/form-data">
                             <div class="mb-3 row">
-                                <label for="staticEmail" class="col-sm-2 col-form-label">Name</label>
+                                <label for="staticEmail" class="col-sm-2 col-form-label">Fullname</label>
                                 <div class="col-sm-10">
                                     <input type="text" class="form-control" name="fileattach" id="fileattach" />
                                 </div>
                             </div>
                             <div class="mb-3 row">
-                                <label for="staticEmail" class="col-sm-2 col-form-label">Detail</label>
+                                <label for="staticEmail" class="col-sm-2 col-form-label">Username</label>
                                 <div class="col-sm-10">
-                                    <textarea name="" class="form-control" placeholder="your message" id="" cols="30" rows="10"></textarea>
+                                    <input type="text" class="form-control" name="fileattach" id="fileattach" />
+                                </div>
+                            </div>
+                           
+                            <div class="mb-3 row">
+                                <label for="staticEmail" class="col-sm-2 col-form-label">Password</label>
+                                <div class="col-sm-10">
+                                    <input type="text" class="form-control" name="fileattach" id="fileattach" />
                                 </div>
                             </div>
                             <div class="mb-3 row">
-                                <label for="staticEmail" class="col-sm-2 col-form-label">Price</label>
+                                <label for="staticEmail" class="col-sm-2 col-form-label">IS Admin</label>
                                 <div class="col-sm-10">
-                                    <input type="text" class="form-control" name="fileattach" id="fileattach" />
+                                    <select class="form-control">
+                                        <option value="2">NO</option>
+                                        <option value="1">YES</option>
+                                    </select>
                                 </div>
                             </div>
                             <div class="mb-3 row">

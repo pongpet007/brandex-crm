@@ -31,37 +31,43 @@ $logout = function (Logout $logout) {
         <div>
             <ul class="menu-inner">
                 <!-- Dashboards -->
-                <li class="menu-item pe-3">
-                    <a href="{{ url('lead') }}" class="menu-link menu-toggle">
+                <li class="menu-item pe-5">
+                    <a href="{{ url('calendar') }}" class="menu-link ">
+                        <i class="menu-icon tf-icons ti ti-calendar-plus"></i>
+                        <div data-i18n="Calendar">Calendar</div>
+                    </a>
+                </li>
+                <li class="menu-item pe-5">
+                    <a href="{{ url('lead') }}" class="menu-link ">
                         <i class="menu-icon tf-icons ti ti-confetti"></i>
                         <div data-i18n="Leads">Leads</div>
                     </a>
-                </li>
-                {{-- <li class="menu-item pe-3">
-                    <a href="{{url("order")}}" class="menu-link menu-toggle">
-                        <i class="menu-icon tf-icons ti ti-truck-delivery"></i>
-                        <div data-i18n="Orders">Orders</div>
-                    </a>
-                </li> --}}
-                <li class="menu-item pe-3">
-                    <a href="{{url('customer')}}" class="menu-link menu-toggle">
-                        <i class="menu-icon tf-icons ti ti-users-plus"></i>
+                </li>               
+                <li class="menu-item pe-5">
+                    <a href="{{url('customer')}}" class="menu-link ">
+                        <i class="menu-icon tf-icons ti ti-building-castle "></i>
                         <div data-i18n="Customer">Customer</div>
                     </a>
                 </li>
-                <li class="menu-item pe-3">
+                {{-- <li class="menu-item pe-5">
                     <a href="{{url('quotation')}}" class="menu-link menu-toggle">
                         <i class="menu-icon tf-icons ti ti-checks"></i>
                         <div data-i18n="Approve Quotation">Approve Quotation</div>
                     </a>
-                </li>
-                <li class="menu-item pe-3">
-                    <a href="{{url('product')}}" class="menu-link menu-toggle">
+                </li> --}}
+                <li class="menu-item pe-5">
+                    <a href="{{url('product')}}" class="menu-link ">
                         <i class="menu-icon tf-icons ti ti-gift"></i>
                         <div data-i18n="Product">Product</div>
                     </a>
                 </li>
-                <li class="menu-item pe-3">
+                <li class="menu-item pe-5">
+                    <a href="{{url('users')}}" class="menu-link ">
+                        <i class="menu-icon tf-icons ti ti-users-plus"></i>
+                        <div data-i18n="Users">Users</div>
+                    </a>
+                </li>
+                <li class="menu-item pe-5">
                     <a href="{{url('setting')}}" class="menu-link menu-toggle">
                         <i class="menu-icon tf-icons ti ti-settings"></i>
                         <div data-i18n="Setting">Setting</div>
