@@ -8,10 +8,10 @@
                     <div class="card-title mb-0">
                         <div class="d-flex">
                             <div class="me-3">
-                                <a href="{{ url('product-form') }}" class="btn btn-primary">Create Product</a>
+                                <a href="{{ url('product-form/0') }}" class="btn btn-primary">Create Product</a>
                             </div>
                             <div>
-                                <input type="text" placeholder="Search Product" class="form-control">
+                                <input type="text" wire:model.live='search' placeholder="Search Product" class="form-control">
                             </div>
                         </div>
                     </div>
@@ -29,30 +29,30 @@
                 </div>
                 <div class="card-datatable table-responsive">
                     <table class="dt-route-vehicles table table-hover">
-                        <tr>                          
+                        <tr>
                             <th class="text-black">Product name</th>
                             <th class="text-black">Detail</th>
                             <th class="text-black">Price</th>
                             <th class="text-black">IS Active</th>
+                            <th class="text-black">Action</th>
                         </tr>
-                        <tr>                            
-                            <td>
-                                <div style="color: black">xxx</div>
-                            </td>
-                            <td>xxx</td>
-                            <td>100,000</td>
-                            <td>Active</td>
-                        </tr>
+                        @foreach ($products as $product)
+                            <tr>
+                                <td>
+                                    <div style="color: black">{{ $product->pro_name }}</div>
+                                </td>
+                                <td>{{ $product->pro_detail }}</td>
+                                <td>{{ $product->pro_price }}</td>
+                                <td>{{ $product->is_active==1?'YES':'' }}</td>
+                                <td>
+                                    <a href="{{ url("/product-form/{$product->pro_id}") }}" class="btn btn-warning">edit</a>
+                                </td>
+                            </tr>
+                        @endforeach
                     </table>
                     <div class="p-3">
                         <nav aria-label="Page navigation example">
-                            <ul class="pagination mb-0">
-                                <li class="page-item"><a class="page-link" href="#">Previous</a></li>
-                                <li class="page-item"><a class="page-link active" href="#">1</a></li>
-                                <li class="page-item"><a class="page-link" href="#">2</a></li>
-                                <li class="page-item"><a class="page-link" href="#">3</a></li>
-                                <li class="page-item"><a class="page-link" href="#">Next</a></li>
-                            </ul>
+                            {{ $products->links() }}
                         </nav>
                     </div>
                 </div>

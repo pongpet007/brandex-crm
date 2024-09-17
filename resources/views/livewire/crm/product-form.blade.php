@@ -11,29 +11,29 @@
                 </div>
                 <div class="card-body">
                     <div class="row">
-                        <form method="POST" action="" enctype="multipart/form-data">                           
+                        <form method="POST" wire:submit='save' action="" enctype="multipart/form-data">                           
                             <div class="mb-3 row">
                                 <label for="staticEmail" class="col-sm-2 col-form-label">Name</label>
                                 <div class="col-sm-10">
-                                    <input type="text" class="form-control" name="fileattach" id="fileattach" />
+                                    <input type="text" wire:model='pro_name' class="form-control" name="fileattach" id="fileattach" />
                                 </div>
                             </div>
                             <div class="mb-3 row">
                                 <label for="staticEmail" class="col-sm-2 col-form-label">Detail</label>
                                 <div class="col-sm-10">
-                                    <textarea name="" class="form-control" placeholder="your message" id="" cols="30" rows="10"></textarea>
+                                    <textarea  wire:model='pro_detail' class="form-control" placeholder="your message" id="" cols="30" rows="10"></textarea>
                                 </div>
                             </div>
                             <div class="mb-3 row">
                                 <label for="staticEmail" class="col-sm-2 col-form-label">Price</label>
                                 <div class="col-sm-10">
-                                    <input type="text" class="form-control" name="fileattach" id="fileattach" />
+                                    <input type="text"  wire:model='pro_price' class="form-control" name="fileattach" id="fileattach" />
                                 </div>
                             </div>
                             <div class="mb-3 row">
-                                <label for="staticEmail" class="col-sm-2 col-form-label">IS Active</label>
+                                <label for="staticEmail"  class="col-sm-2 col-form-label">IS Active</label>
                                 <div class="col-sm-10">
-                                    <select class="form-control">
+                                    <select  wire:model='is_active' class="form-control">
                                         <option value="1">Active</option>
                                         <option value="2">Inactive</option>
                                     </select>

@@ -29,9 +29,9 @@ Route::view('profile', 'profile')
 
 Route::middleware('auth')->group(function () {
 
-    Route::get('/calendar',Calendar::class);
+    Route::get('/calendar', Calendar::class);
     Route::get('/setting', SettingForm::class);
-    
+
     Route::get('/lead', LeadShow::class);
     Route::get('/lead-form', LeadForm::class);
 
@@ -45,11 +45,10 @@ Route::middleware('auth')->group(function () {
     Route::get('/quotation-form', QuotationForm::class);
 
     Route::get('/product', ProductShow::class);
-    Route::get('/product-form', ProductForm::class);
+    Route::get('/product-form/{pro_id}', ProductForm::class);
 
     Route::get('/users', UsersShow::class);
-    Route::get('/users-form', UsersForm::class);
-
+    Route::get('/users-form/{id}', UsersForm::class);
     
 });
 

@@ -1,17 +1,20 @@
 <div class="container">
-   
-    <div class="row">  
+
+    <div class="row">
         <div class="col-12 order-5">
             <div class="card">
                 <div class="card-header d-flex align-items-center justify-content-between p-3"
                     style="background-color: rgba(217, 217, 217, 0.923)">
                     <div class="card-title mb-0">
                         <div class="d-flex">
-                            <div class="me-3"> <a href="{{url('users-form')}}" class="btn btn-primary">Create User</a></div>
+                            <div class="me-3"> <a href="{{ url('users-form/0') }}" class="btn btn-primary">Create
+                                    User</a>
+                            </div>
 
-                            <div><input type="text" placeholder="Search" class="form-control"></div>
-                           
-                            
+                            <div><input type="text" wire:model.live='search' placeholder="Search"
+                                    class="form-control"></div>
+
+
                         </div>
                     </div>
                     <div class="dropdown d-none">
@@ -30,31 +33,27 @@
                     <table class="dt-route-vehicles table table-hover">
                         <tr>
                             <th class="text-black">Fullname</th>
-                            <th class="text-black">Username</th>
-                            <th class="text-black">is admin</th>
-                            <th class="text-black">is Active</th>
+                            <th class="text-black">E-mail</th>
+                            <th class="text-black">Is Admin</th>
+                            <th class="text-black">Is Active</th>
                             <th class="text-black">Action</th>
-                            
+
                         </tr>
-                        <tr>                         
-                            <td>xxx</td>
-                            <td>xxx</td>
-                            <td>xxx</td>                            
-                            <td>Active</td>
-                            <td>
-                                <a href="" class="btn btn-warning">edit</a>                                
-                            </td>
-                        </tr>
+                        @foreach ($users as $user)
+                            <tr>
+                                <td>{{ $user->name }}</td>
+                                <td>{{ $user->email }}</td>
+                                <td>{{ $user->is_admin == 1 ? 'YES' : '' }}</td>
+                                <td>{{ $user->is_active == 1 ? 'YES' : '' }}</td>
+                                <td>
+                                    <a href="{{ url("users-form/{$user->id}") }}" class="btn btn-warning">edit</a>
+                                </td>
+                            </tr>
+                        @endforeach
                     </table>
                     <div class="p-3">
                         <nav aria-label="Page navigation example">
-                            <ul class="pagination mb-0">
-                                <li class="page-item"><a class="page-link" href="#">Previous</a></li>
-                                <li class="page-item"><a class="page-link active" href="#">1</a></li>
-                                <li class="page-item"><a class="page-link" href="#">2</a></li>
-                                <li class="page-item"><a class="page-link" href="#">3</a></li>
-                                <li class="page-item"><a class="page-link" href="#">Next</a></li>
-                            </ul>
+                            {{ $users->links() }}
                         </nav>
                     </div>
                 </div>
