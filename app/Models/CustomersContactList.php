@@ -1,6 +1,6 @@
 <?php
 
-namespace App\Models\Crm;
+namespace App\Models;
 
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
@@ -28,6 +28,7 @@ class CustomersContactList extends Model
         'contact_name', 
         'contact_nickname', 
         'contact_birthday',             
+        'contact_position',             
         'contact_email',             
         'contact_mobile',             
         'contact_telephone',             

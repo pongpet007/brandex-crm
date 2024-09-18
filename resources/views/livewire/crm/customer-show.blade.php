@@ -8,10 +8,11 @@
                     <div class="card-title mb-0">
                         <div class="d-flex">
                             <div class="me-3">
-                                <a href="{{ url('customer-form') }}" class="btn btn-primary">Create Customer</a>
+                                <a href="{{ url('customer-form/0') }}" class="btn btn-primary">Create Customer</a>
                             </div>
                             <div>
-                                <input type="text" placeholder="Search Customer" class="form-control">
+                                <input type="text" wire:model.live='search' placeholder="Search Customer"
+                                    class="form-control">
                             </div>
                         </div>
                     </div>
@@ -28,19 +29,31 @@
                     </div>
                 </div>
                 <div class="card-datatable table-responsive">
-                    <table class="dt-route-vehicles table table-hover">
+                    <table class="dt-route-vehicles table table-hover table-striped">
                         <tr>
                             <th>Customer name</th>
                             <th>Address</th>
-                            <th>Logo</th>
+                            <th>Contact name</th>
+                            <th>Action</th>
                         </tr>
-                        <tr>
-                            <td>xxx</td>
-                            <td>xxx</td>
-                            <td>xxx</td>
+                        @foreach ($customers as $customer)
+                            <tr>
+                                <td>{{ $customer->cus_name }}</td>
+                                <td>{{ $customer->cus_address_th }}</td>
+                                <td>{{ $customer->contact_name }}</td>
+                                <td>
+                                    <a href="{{ url("customer-form/$customer->cus_id") }}"
+                                        class="btn btn-warning">edit</a>
+                                </td>
 
-                        </tr>
+                            </tr>
+                        @endforeach
                     </table>
+                    <div class="p-3">
+                        <nav aria-label="Page navigation example">
+                            {{ $customers->links() }}
+                        </nav>
+                    </div>
                 </div>
             </div>
         </div>

@@ -1,6 +1,6 @@
 <?php
 
-namespace App\Models\Crm;
+namespace App\Models;
 
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
@@ -14,10 +14,10 @@ class Customers extends Model
     protected $table = 'customers';
     protected $primaryKey = 'cus_id';
 
-    public function language(): HasMany
-    {
-        return $this->hasMany(CustomersContactList::class,'cus_id','cus_id');
-    }
+    // public function contactList(): HasMany
+    // {
+    //     return $this->hasMany(CustomersContactList::class,'cus_id','cus_id');
+    // }
 
     // public function contactList() : BelongsTo
     // {

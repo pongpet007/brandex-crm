@@ -2,7 +2,7 @@
 
 namespace App\Livewire\Crm;
 
-use App\Models\Crm\Products;
+use App\Models\Products;
 use Illuminate\Contracts\Database\Eloquent\Builder;
 use Livewire\Attributes\Layout;
 use Livewire\Component;

@@ -370,7 +370,8 @@
     </div>
 
     <livewire:crm.components.lead-final-step-modal>
-        <livewire:crm.components.activity-log-modal>
+
+    <livewire:crm.components.activity-log-modal>
 
 </div>
 @push('scripts')

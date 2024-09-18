@@ -2,7 +2,7 @@
 
 namespace App\Livewire\Crm;
 
-use App\Models\Crm\Products;
+use App\Models\Products;
 use Illuminate\Support\Facades\Auth;
 use Livewire\Attributes\Layout;
 use Livewire\Component;

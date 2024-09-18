@@ -28,7 +28,7 @@
                     </div>
                 </div>
                 <div class="card-datatable table-responsive">
-                    <table class="dt-route-vehicles table table-hover">
+                    <table class="dt-route-vehicles table table-hover table-striped">
                         <tr>
                             <th class="text-black">Product name</th>
                             <th class="text-black">Detail</th>

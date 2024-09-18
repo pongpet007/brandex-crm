@@ -39,7 +39,7 @@ Route::middleware('auth')->group(function () {
     Route::get('/order-form', OrderForm::class);
 
     Route::get("/customer", CustomerShow::class);
-    Route::get('/customer-form', CustomerForm::class);
+    Route::get('/customer-form/{cus_id}', CustomerForm::class);
 
     Route::get('/quotation', QuotationShow::class);
     Route::get('/quotation-form', QuotationForm::class);
