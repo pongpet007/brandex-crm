@@ -42,9 +42,9 @@ $logout = function (Logout $logout) {
                         <i class="menu-icon tf-icons ti ti-confetti"></i>
                         <div data-i18n="Leads">Leads</div>
                     </a>
-                </li>               
+                </li>
                 <li class="menu-item pe-5">
-                    <a href="{{url('customer')}}" class="menu-link ">
+                    <a href="{{ url('customer') }}" class="menu-link ">
                         <i class="menu-icon tf-icons ti ti-building-castle "></i>
                         <div data-i18n="Customer">Customer</div>
                     </a>
@@ -56,19 +56,19 @@ $logout = function (Logout $logout) {
                     </a>
                 </li> --}}
                 <li class="menu-item pe-5">
-                    <a href="{{url('product')}}" class="menu-link ">
+                    <a href="{{ url('product') }}" class="menu-link ">
                         <i class="menu-icon tf-icons ti ti-gift"></i>
                         <div data-i18n="Product">Product</div>
                     </a>
                 </li>
                 <li class="menu-item pe-5">
-                    <a href="{{url('users')}}" class="menu-link ">
+                    <a href="{{ url('users') }}" class="menu-link ">
                         <i class="menu-icon tf-icons ti ti-users-plus"></i>
                         <div data-i18n="Users">Users</div>
                     </a>
                 </li>
                 <li class="menu-item pe-5">
-                    <a href="{{url('setting')}}" class="menu-link menu-toggle">
+                    <a href="{{ url('setting') }}" class="menu-link menu-toggle">
                         <i class="menu-icon tf-icons ti ti-settings"></i>
                         <div data-i18n="Setting">Setting</div>
                     </a>
@@ -79,7 +79,7 @@ $logout = function (Logout $logout) {
 
         <div class="navbar-nav-right d-flex align-items-center" id="navbar-collapse">
             <ul class="navbar-nav flex-row align-items-center ms-auto">
-                
+
                 {{-- <!-- Language -->
                 <li class="nav-item dropdown-language dropdown me-2 me-xl-0">
                     <a class="nav-link dropdown-toggle hide-arrow" href="javascript:void(0);" data-bs-toggle="dropdown">
@@ -113,7 +113,7 @@ $logout = function (Logout $logout) {
                     </ul>
                 </li>
                 <!--/ Language --> --}}
-               
+
 
                 {{-- <!-- Search -->
                 <li class="nav-item navbar-search-wrapper me-2 me-xl-0">
@@ -126,7 +126,7 @@ $logout = function (Logout $logout) {
                 <!-- Style Switcher -->
                 <li class="nav-item dropdown-style-switcher dropdown me-2 me-xl-0">
                     <a class="nav-link dropdown-toggle hide-arrow" href="javascript:void(0);" data-bs-toggle="dropdown">
-                      <i class="ti ti-sun"></i>
+                        <i class="ti ti-sun"></i>
                     </a>
                     <ul class="dropdown-menu dropdown-menu-end dropdown-styles">
                         <li>
@@ -147,7 +147,7 @@ $logout = function (Logout $logout) {
                     </ul>
                 </li>
                 <!-- / Style Switcher-->
-               
+
                 {{-- <!-- Quick links  -->
                 <li class="nav-item dropdown-shortcuts navbar-dropdown dropdown me-2 me-xl-0">
                     <a class="nav-link dropdown-toggle hide-arrow" href="javascript:void(0);" data-bs-toggle="dropdown"
@@ -233,7 +233,7 @@ $logout = function (Logout $logout) {
                     </div>
                 </li>
                 <!-- Quick links --> --}}
-               
+
                 <!-- Notification -->
                 <li class="nav-item dropdown-notifications navbar-dropdown dropdown me-3 me-xl-1">
                     <a class="nav-link dropdown-toggle hide-arrow" href="javascript:void(0);" data-bs-toggle="dropdown"
@@ -256,7 +256,8 @@ $logout = function (Logout $logout) {
                                     <div class="d-flex">
                                         <div class="flex-shrink-0 me-3">
                                             <div class="avatar">
-                                                <img src="assets/img/avatars/1.png" alt class="h-auto rounded-circle" />
+                                                <img src="{{ asset('assets/img/avatars/1.png') }}" alt
+                                                    class="h-auto rounded-circle" />
                                             </div>
                                         </div>
                                         <div class="flex-grow-1">
@@ -464,7 +465,7 @@ $logout = function (Logout $logout) {
                     <a class="nav-link dropdown-toggle hide-arrow" href="javascript:void(0);"
                         data-bs-toggle="dropdown">
                         <div class="avatar avatar-online">
-                            <img src="assets/img/avatars/1.png" alt class="h-auto rounded-circle" />
+                            <img src="{{ asset('assets/img/avatars/1.png') }}" alt class="h-auto rounded-circle" />
                         </div>
                     </a>
                     <ul class="dropdown-menu dropdown-menu-end">
@@ -473,7 +474,8 @@ $logout = function (Logout $logout) {
                                 <div class="d-flex">
                                     <div class="flex-shrink-0 me-3">
                                         <div class="avatar avatar-online">
-                                            <img src="assets/img/avatars/1.png" alt class="h-auto rounded-circle" />
+                                            <img src="{{ asset('assets/img/avatars/1.png') }}" alt
+                                                class="h-auto rounded-circle" />
                                         </div>
                                     </div>
                                     <div class="flex-grow-1">
@@ -546,17 +548,19 @@ $logout = function (Logout $logout) {
         </div>
     </div>
     <style>
-        .dark-style .menu-inner .menu-item a{
+        .dark-style .menu-inner .menu-item a {
             color: white;
         }
-        .dark-style .menu-inner .menu-item a:hover{
+
+        .dark-style .menu-inner .menu-item a:hover {
             color: yellow;
         }
 
-        .menu-inner .menu-item a{
+        .menu-inner .menu-item a {
             color: black;
         }
-        .menu-inner .menu-item a:hover{
+
+        .menu-inner .menu-item a:hover {
             color: rgb(57, 57, 57);
         }
     </style>

@@ -8,7 +8,7 @@
                     <div class="card-title mb-0">
                         <div class="d-flex">
                             <div class="me-3">
-                                <a href="{{ url('product-form/0') }}" class="btn btn-primary">Create Product</a>
+                                <button type="button" data-bs-toggle="modal" data-bs-target="#product-form-modal" class="btn btn-primary">Create Product</button>
                             </div>
                             <div>
                                 <input type="text" wire:model.live='search' placeholder="Search Product" class="form-control">
@@ -45,7 +45,15 @@
                                 <td>{{ $product->pro_price }}</td>
                                 <td>{{ $product->is_active==1?'YES':'' }}</td>
                                 <td>
-                                    <a href="{{ url("/product-form/{$product->pro_id}") }}" class="btn btn-warning">edit</a>
+                                    <button @click="$dispatch('product-edit',{id:{{ $product->pro_id }}})"
+                                        data-bs-toggle="modal" data-bs-target="#product-form-modal"
+                                        class="btn btn-warning">edit</button>
+
+                                    <button class="btn btn-danger"
+                                        wire:click="delete({{ $product->pro_id }})"
+                                        wire:confirm="Delete product ?">
+                                        delete
+                                    </button>   
                                 </td>
                             </tr>
                         @endforeach
@@ -61,5 +69,8 @@
 
         <!--/ On route vehicles Table -->
     </div>
+
+    <livewire:crm.components.product-form-modal>
+        <livewire:crm.components.toast-alert>
 
 </div>

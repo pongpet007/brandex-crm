@@ -25,6 +25,7 @@ class Customers extends Model
     // }
     
     protected $fillable = [
+        'taxid',
         'cus_name',
         'cus_name_register_th',              
         'cus_name_register_en',              

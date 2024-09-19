@@ -7,8 +7,10 @@
                     style="background-color: rgba(217, 217, 217, 0.923)">
                     <div class="card-title mb-0">
                         <div class="d-flex">
-                            <div class="me-3"> <a href="{{ url('users-form/0') }}" class="btn btn-primary">Create
-                                    User</a>
+                            <div class="me-3">
+                                <button data-bs-toggle="modal" data-bs-target="#user-form-modal"
+                                    class="btn btn-primary">Create
+                                    User</button>
                             </div>
 
                             <div><input type="text" wire:model.live='search' placeholder="Search"
@@ -46,7 +48,15 @@
                                 <td>{{ $user->is_admin == 1 ? 'YES' : '' }}</td>
                                 <td>{{ $user->is_active == 1 ? 'YES' : '' }}</td>
                                 <td>
-                                    <a href="{{ url("users-form/{$user->id}") }}" class="btn btn-warning">edit</a>
+                                    <button @click="$dispatch('user-edit',{id:{{ $user->id }}})"
+                                        data-bs-toggle="modal" data-bs-target="#user-form-modal"
+                                        class="btn btn-warning">edit</button>
+
+                                    {{-- <button class="btn btn-danger"
+                                        wire:click="delete({{ $user->id }})"
+                                        wire:confirm="Delete user ?">
+                                        delete
+                                    </button>    --}}
                                 </td>
                             </tr>
                         @endforeach
@@ -62,5 +72,7 @@
 
         <!--/ On route vehicles Table -->
     </div>
+    <livewire:crm.components.user-form-modal>
+        <livewire:crm.components.toast-alert>
 
 </div>

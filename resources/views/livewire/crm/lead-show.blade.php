@@ -9,7 +9,7 @@
                                 <span class="avatar-initial rounded bg-label-primary"><i
                                         class="ti ti-truck ti-md"></i></span>
                             </div>
-                            <h4 class="ms-1 mb-0">42</h4>
+                            <h4 class="ms-1 mb-0">{{ $countNew }}</h4>
                         </div>
                         <p class="mb-1">ใหม่</p>
                     </div>
@@ -25,7 +25,7 @@
                                 <span class="avatar-initial rounded bg-label-warning"><i
                                         class="ti ti-alert-triangle ti-md"></i></span>
                             </div>
-                            <h4 class="ms-1 mb-0">8</h4>
+                            <h4 class="ms-1 mb-0">{{ $countPresent }}</h4>
                         </div>
                         <p class="mb-1">นำเสนอ</p>
                         {{-- <p class="mb-0">
@@ -45,7 +45,7 @@
                                 <span class="avatar-initial rounded bg-label-info"><i
                                         class="ti ti-alert-triangle ti-md"></i></span>
                             </div>
-                            <h4 class="ms-1 mb-0">8</h4>
+                            <h4 class="ms-1 mb-0">{{ $countMeet }}</h4>
                         </div>
                         <p class="mb-1">เข้าพบ</p>
                         {{-- <p class="mb-0">
@@ -65,7 +65,7 @@
                                 <span class="avatar-initial rounded bg-label-danger"><i
                                         class="ti ti-git-fork ti-md"></i></span>
                             </div>
-                            <h4 class="ms-1 mb-0">27</h4>
+                            <h4 class="ms-1 mb-0">{{ $countNegotiate }}</h4>
                         </div>
                         <p class="mb-1">ต่อรอง</p>
                     </div>
@@ -81,7 +81,7 @@
                                 <span class="avatar-initial rounded bg-label-success"><i
                                         class="ti ti-clock ti-md"></i></span>
                             </div>
-                            <h4 class="ms-1 mb-0">13</h4>
+                            <h4 class="ms-1 mb-0">{{ $countFinish }}</h4>
                         </div>
                         <p class="mb-1">ปิดการขาย</p>
                     </div>
@@ -97,7 +97,7 @@
                                 <span class="avatar-initial rounded bg-label-secondary"><i
                                         class="ti ti-clock ti-md"></i></span>
                             </div>
-                            <h4 class="ms-1 mb-0">13</h4>
+                            <h4 class="ms-1 mb-0">{{ $countCancle }}</h4>
                         </div>
                         <p class="mb-1">ยกเลิกการติดตาม</p>
                     </div>
@@ -114,10 +114,10 @@
                     <div class="card-title mb-0">
                         <div class="d-flex">
                             <div class="me-3">
-                                <button data-bs-toggle="modal" data-bs-target="#createModal"
+                                <button data-bs-toggle="modal" data-bs-target="#leads-form-modal"
                                     class="btn btn-primary">Create Leads</button>
                             </div>
-                            <div><input type="text" placeholder="Search leads" class="form-control"></div>
+                            <div><input type="text" wire:model.live='search' placeholder="Search leads" class="form-control"></div>
                         </div>
                     </div>
 
@@ -126,41 +126,36 @@
                     <table class="dt-route-vehicles table table-hover">
                         <tr>
                             <th class="text-black">status</th>
-                            <th class="text-black">Leads ID</th>
+                            <th class="text-black">Code</th>
                             <th class="text-black">Leads name</th>
                             <th class="text-black">Company</th>
                             <th class="text-black text-center">Assignee</th>
                             <th class="text-black text-center">Leads start-expire</th>
                             <th class="text-black text-center">Quotation Active Value</th>
                         </tr>
+                        @foreach ($leads as $lead)
                         <tr>
-                            <td> ใหม่ </td>
-                            <td> <a href="{{ url('lead-form') }}">L650916-1</a></td>
+                            <td> {{ $lead->step_id }} </td>
+                            <td> <a href="{{ url('lead-form') }}">{{ $lead->code }}</a></td>
                             <td>
 
-                                <div style="color: black"> <a href="{{ url('lead-form') }}">xxxxxx </a></div>
-                                <div class="text-warning"> [ รายละเอียด ] </div>
+                                <div style="color: black"> <a href="{{ url('lead-form') }}">{{ $lead->leads_name }} </a></div>
+                                <div class="text-warning"> [ {{ $lead->leads_detail }} ] </div>
 
                             </td>
-                            <td>xxx</td>
-                            <td class="text-center">xxx</td>
+                            <td>{{ $lead->cus_id }}</td>
+                            <td class="text-center">{{ $lead->user_id }}</td>
                             <td class="text-center">
-                                <span class="text-warning">2024-9-15</span> <br>valid to<br>
-                                <span class="text-warning">2024-12-15</span>
+                                <span class="text-warning">{{ $lead->leads_start }}</span> <br>valid to<br>
+                                <span class="text-warning">{{ $lead->leads_expire }}</span>
                             </td>
-                            <td class="text-center">100,000</td>
+                            <td class="text-center">0</td>
                         </tr>
-
+                        @endforeach
                     </table>
                     <div class="p-3">
                         <nav aria-label="Page navigation example">
-                            <ul class="pagination mb-0">
-                                <li class="page-item"><a class="page-link" href="#">Previous</a></li>
-                                <li class="page-item"><a class="page-link active" href="#">1</a></li>
-                                <li class="page-item"><a class="page-link" href="#">2</a></li>
-                                <li class="page-item"><a class="page-link" href="#">3</a></li>
-                                <li class="page-item"><a class="page-link" href="#">Next</a></li>
-                            </ul>
+                            {{ $leads->links() }}
                         </nav>
                     </div>
                 </div>
@@ -170,5 +165,5 @@
         <!--/ On route vehicles Table -->
     </div>
     <livewire:crm.components.lead-create-modal>
-        
+    <livewire:crm.components.toast-alert>
 </div>

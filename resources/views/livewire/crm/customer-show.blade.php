@@ -8,7 +8,8 @@
                     <div class="card-title mb-0">
                         <div class="d-flex">
                             <div class="me-3">
-                                <a href="{{ url('customer-form/0') }}" class="btn btn-primary">Create Customer</a>
+                                <button type="button" data-bs-toggle="modal" data-bs-target="#customer-form-modal"
+                                    class="btn btn-primary">Create Customer</button>
                             </div>
                             <div>
                                 <input type="text" wire:model.live='search' placeholder="Search Customer"
@@ -44,6 +45,8 @@
                                 <td>
                                     <a href="{{ url("customer-form/$customer->cus_id") }}"
                                         class="btn btn-warning">edit</a>
+                                    <button wire:click='delete({{ $customer->cus_id }})'
+                                        wire:confirm="Delete customer ?" class="btn btn-danger">delete</button>
                                 </td>
 
                             </tr>
@@ -60,5 +63,6 @@
 
         <!--/ On route vehicles Table -->
     </div>
-
+    <livewire:crm.components.customer-form-modal>
+        <livewire:crm.components.toast-alert>
 </div>

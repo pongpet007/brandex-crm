@@ -205,7 +205,7 @@
         </div>
     </div>
 
-    <div x-data x-init="@this.on('updatedxxx', event => {
+    <div x-data x-init="@this.on('updated', event => {
         var element = document.getElementById('liveToast');
         setTimeout(function() {
             const myToast = new bootstrap.Toast(element);

@@ -36,6 +36,7 @@ class Leads extends Model
     
     protected $fillable = [
         'leads_name', 
+        'leads_detail', 
         'code', 
         'y',             
         'm',             

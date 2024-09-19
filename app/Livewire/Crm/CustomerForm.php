@@ -33,6 +33,8 @@ class CustomerForm extends Component
     public $contact_line = "";
     public $contact_ig = "";
     public $contact_facebook = "";
+    public $msg_toast = "";
+
 
     public function save()
     {
@@ -60,32 +62,10 @@ class CustomerForm extends Component
             $customer->contact_facebook = $this->contact_facebook;
             $customer->uby = Auth::user()->name;
             $customer->save();
-        } else {
-            $customer = [
-            'cus_name' => $this->cus_name,
-            'taxid' => $this->taxid,
-            'cus_name_register_th' => $this->cus_name_register_th,
-            'cus_name_register_en' => $this->cus_name_register_en,
-            'cus_address_th' => $this->cus_address_th,
-            'cus_address_en' => $this->cus_address_en,
-            'cus_email' => $this->cus_email,
-            'cus_telephone' => $this->cus_telephone,
-            'cus_website' => $this->cus_website,
-            'cus_fax' => $this->cus_fax,
-            'contact_name' => $this->contact_name,
-            'contact_nickname' => $this->contact_nickname,
-            'contact_birthday' => $this->contact_birthday,
-            'contact_position' => $this->contact_position,
-            'contact_email' => $this->contact_email,
-            'contact_mobile' => $this->contact_mobile,
-            'contact_telephone' => $this->contact_telephone,
-            'contact_line' => $this->contact_line,
-            'contact_ig' => $this->contact_ig,
-            'contact_facebook' => $this->contact_facebook,
-            'cby' => Auth::user()->name,
-            ];
-            Customers::create($customer);
         }
+        
+        $msg = 'Company and contact saved.';
+        $this->dispatch('toast-alert', msg: [$msg, 'success']);
     }
 
     public function newcontact()
@@ -105,16 +85,23 @@ class CustomerForm extends Component
             'cby' => Auth::user()->name
         ]);
 
-        $this->reset('contact_name');
-        $this->reset('contact_nickname');
-        $this->reset('contact_birthday');
-        $this->reset('contact_position');
-        $this->reset('contact_email');
-        $this->reset('contact_mobile');
-        $this->reset('contact_telephone');
-        $this->reset('contact_line');
-        $this->reset('contact_ig');
-        $this->reset('contact_facebook');
+        if ($this->cus_id > 0) {
+            $customer = Customers::find($this->cus_id);
+            $customer->contact_name = "";
+            $customer->contact_nickname = "";
+            $customer->contact_birthday = "";
+            $customer->contact_position = "";
+            $customer->contact_email = "";
+            $customer->contact_mobile = "";
+            $customer->contact_telephone = "";
+            $customer->contact_line = "";
+            $customer->contact_ig = "";
+            $customer->contact_facebook = "";
+            $customer->save();
+        }
+        
+        $msg = 'Backup old contact complete.';
+        $this->dispatch('toast-alert', msg: [$msg, 'success']);
     }
 
     public function restoreContact($contact_id)
@@ -132,12 +119,17 @@ class CustomerForm extends Component
         $customer->contact_ig = $contact->contact_ig;
         $customer->contact_facebook = $contact->contact_facebook;
         $customer->save();
+        $msg = 'Restore complete.';
+        $this->dispatch('toast-alert', msg: [$msg, 'warning']);
     }
 
     public function deleteContact($contact_id)
     {
         $contact = CustomersContactList::find($contact_id);
         $contact->delete();
+
+        $msg = 'Delete complete.';
+        $this->dispatch('toast-alert', msg: [$msg, 'danger']);
     }
 
     public function render()
