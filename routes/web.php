@@ -1,6 +1,7 @@
 <?php
 
 use App\Livewire\Crm\Calendar;
+use App\Livewire\Crm\ChangePasswordForm;
 use App\Livewire\Crm\CustomerForm;
 use App\Livewire\Crm\CustomerShow;
 use App\Livewire\Crm\LeadForm;
@@ -31,6 +32,7 @@ Route::middleware('auth')->group(function () {
 
     Route::get('/calendar', Calendar::class);
     Route::get('/setting', SettingForm::class);
+    Route::get('/change-password', ChangePasswordForm::class);
 
     Route::get('/lead', LeadShow::class);
     Route::get('/lead-form/{leads_id}', LeadForm::class);

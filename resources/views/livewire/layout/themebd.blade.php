@@ -1,7 +1,7 @@
 <!doctype html>
 
 <html lang="en" class="light-style layout-menu-fixed layout-wide" dir="ltr" data-theme="theme-default"
-    data-assets-path="{{ asset('assets/') }}" data-template="horizontal-menu-template">
+    data-assets-path="{{ asset('assets') }}/" data-template="horizontal-menu-template">
 
 <head>
     <meta charset="utf-8" />

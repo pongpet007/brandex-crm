@@ -239,8 +239,9 @@ $logout = function (Logout $logout) {
                     <a class="nav-link dropdown-toggle hide-arrow" href="javascript:void(0);" data-bs-toggle="dropdown"
                         data-bs-auto-close="outside" aria-expanded="false">
                         <i class="ti ti-bell ti-md"></i>
-                        <span class="badge bg-danger rounded-pill badge-notifications">5</span>
+                        <span class="badge bg-danger rounded-pill badge-notifications">1</span>
                     </a>
+                    <div>
                     <ul class="dropdown-menu dropdown-menu-end py-0">
                         <li class="dropdown-menu-header border-bottom">
                             <div class="dropdown-header d-flex align-items-center py-3">
@@ -273,7 +274,7 @@ $logout = function (Logout $logout) {
                                         </div>
                                     </div>
                                 </li>
-                                <li class="list-group-item list-group-item-action dropdown-notifications-item">
+                                {{-- <li class="list-group-item list-group-item-action dropdown-notifications-item">
                                     <div class="d-flex">
                                         <div class="flex-shrink-0 me-3">
                                             <div class="avatar">
@@ -447,7 +448,7 @@ $logout = function (Logout $logout) {
                                                     class="ti ti-x"></span></a>
                                         </div>
                                     </div>
-                                </li>
+                                </li> --}}
                             </ul>
                         </li>
                         <li class="dropdown-menu-footer border-top">
@@ -457,6 +458,7 @@ $logout = function (Logout $logout) {
                             </a>
                         </li>
                     </ul>
+                </div>
                 </li>
                 <!--/ Notification -->
 
@@ -464,37 +466,39 @@ $logout = function (Logout $logout) {
                 <li class="nav-item navbar-dropdown dropdown-user dropdown">
                     <a class="nav-link dropdown-toggle hide-arrow" href="javascript:void(0);"
                         data-bs-toggle="dropdown">
-                        <div class="avatar avatar-online">
-                            <img src="{{ asset('assets/img/avatars/1.png') }}" alt class="h-auto rounded-circle" />
+                        <div class="avatar">
+                            <span class="avatar-initial rounded-circle bg-label-danger">                                
+                                    {{ mb_substr(Auth::user()->name, 0, 2) }}
+                            </span>
                         </div>
                     </a>
                     <ul class="dropdown-menu dropdown-menu-end">
                         <li>
                             <a class="dropdown-item" href="pages-account-settings-account.html">
                                 <div class="d-flex">
-                                    <div class="flex-shrink-0 me-3">
-                                        <div class="avatar avatar-online">
-                                            <img src="{{ asset('assets/img/avatars/1.png') }}" alt
-                                                class="h-auto rounded-circle" />
-                                        </div>
+                                    <div class="avatar pe-3">
+                                        <span class="avatar-initial rounded-circle bg-label-danger">                                            
+                                                {{ mb_substr(Auth::user()->name, 0, 2) }}                                           
+                                        </span>
                                     </div>
-                                    <div class="flex-grow-1">
-                                        <span class="fw-medium d-block">John Doe</span>
-                                        <small class="text-muted">Admin</small>
+                                    <div class="flex-grow-1 ps-2">
+                                        <span class="fw-medium d-block">{{ Auth::user()->name }}</span>
+                                        <small class="text-muted">{{ Auth::user()->email }}</small>
                                     </div>
                                 </div>
                             </a>
                         </li>
+
                         <li>
                             <div class="dropdown-divider"></div>
                         </li>
                         <li>
-                            <a class="dropdown-item" href="pages-profile-user.html">
+                            <a class="dropdown-item" href="{{ url('change-password') }}">
                                 <i class="ti ti-user-check me-2 ti-sm"></i>
-                                <span class="align-middle">My Profile</span>
+                                <span class="align-middle">Change password</span>
                             </a>
                         </li>
-                        <li>
+                        {{--  <li>
                             <a class="dropdown-item" href="pages-account-settings-account.html">
                                 <i class="ti ti-settings me-2 ti-sm"></i>
                                 <span class="align-middle">Settings</span>
@@ -524,7 +528,7 @@ $logout = function (Logout $logout) {
                                 <i class="ti ti-currency-dollar me-2 ti-sm"></i>
                                 <span class="align-middle">Pricing</span>
                             </a>
-                        </li>
+                        </li> --}}
                         <li>
                             <div class="dropdown-divider"></div>
                         </li>

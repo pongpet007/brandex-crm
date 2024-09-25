@@ -17,6 +17,7 @@ class LeadShow extends Component
 
     public $search = "";
     public $step_id = 1;
+    public $allstep = 0;
 
     public function delete($id)
     {
@@ -37,8 +38,9 @@ class LeadShow extends Component
         $leads = Leads::where(function (Builder $query) {
             $query->where('leads_name', 'like', "%$this->search%")
                 ->orWhere('code', 'like', "%$this->search%");
-        })
-            ->where('step_id', '=', $this->step_id)
+        })->when($this->allstep<>1,function(Builder $query){
+            $query->where('step_id', '=', $this->step_id);
+        })           
             ->orderBy('leads_start', 'desc')
             ->paginate(10);
 

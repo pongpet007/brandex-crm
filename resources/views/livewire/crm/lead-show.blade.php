@@ -118,9 +118,14 @@
                                     class="btn btn-primary">Create Leads</button>
                             </div>
                             <div>
-                                <input type="text" wire:model.live='search' style="width: 400px;"
+                                <input type="text" wire:model.live='search' style="width: 350px;"
                                     placeholder="Search leads" class="form-control">
-                              
+                            </div>
+                            <div class="pt-2 ps-2">
+                                <input class="form-check-input" type="checkbox" id="checkstepall" wire:model.live='allstep' value="1"> 
+                                <label class="form-check-label" for="checkstepall">
+                                    ALL STEP
+                                </label>
                             </div>
                         </div>
                     </div>

@@ -191,32 +191,7 @@
 
         <!--/ On route vehicles Table -->
     </div>
-
-    <div class="toast-container position-fixed bottom-0 end-10 p-3">
-        <div id="liveToast" class="toast" role="alert" aria-live="assertive" aria-atomic="true">
-            <div class="toast-header">
-                <strong class="me-auto">Action notify</strong>
-
-                <button type="button" class="btn-close" data-bs-dismiss="toast" aria-label="Close"></button>
-            </div>
-            <div class="toast-body">
-                {{ $this->msg }}
-            </div>
-        </div>
-    </div>
-
-    <div x-data x-init="@this.on('updated', event => {
-        var element = document.getElementById('liveToast');
-        setTimeout(function() {
-            const myToast = new bootstrap.Toast(element);
-            console.log('updated');
-            myToast.show();
-        }, 100);
-    })"></div>
-
-
-
-
+    <livewire:crm.components.toast-alert />
 </div>
 @push('scripts')
     <script src="assets/vendor/libs/bs-stepper/bs-stepper.js"></script>
