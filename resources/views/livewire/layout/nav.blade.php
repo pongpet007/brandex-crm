@@ -31,12 +31,12 @@ $logout = function (Logout $logout) {
         <div>
             <ul class="menu-inner">
                 <!-- Dashboards -->
-                <li class="menu-item pe-5">
+                {{-- <li class="menu-item pe-5">
                     <a href="{{ url('calendar') }}" class="menu-link ">
                         <i class="menu-icon tf-icons ti ti-calendar-plus"></i>
                         <div data-i18n="Calendar">Calendar</div>
                     </a>
-                </li>
+                </li> --}}
                 <li class="menu-item pe-5">
                     <a href="{{ url('lead') }}" class="menu-link ">
                         <i class="menu-icon tf-icons ti ti-confetti"></i>

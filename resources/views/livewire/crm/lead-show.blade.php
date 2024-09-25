@@ -1,7 +1,7 @@
 <div class="container">
     <div class="row">
         <div class="col-sm-6 col-lg-2 mb-4">
-            <a href="#">
+            <a href="#" wire:click.prevent="setStep(1)">
                 <div class="card card-border-shadow-primary">
                     <div class="card-body">
                         <div class="d-flex align-items-center mb-2 pb-1">
@@ -17,7 +17,7 @@
             </a>
         </div>
         <div class="col-sm-6 col-lg-2 mb-4">
-            <a href="#">
+            <a href="#" wire:click.prevent="setStep(2)">
                 <div class="card card-border-shadow-warning">
                     <div class="card-body">
                         <div class="d-flex align-items-center mb-2 pb-1">
@@ -37,7 +37,7 @@
             </a>
         </div>
         <div class="col-sm-6 col-lg-2 mb-4">
-            <a href="#">
+            <a href="#" wire:click.prevent="setStep(3)">
                 <div class="card card-border-shadow-info">
                     <div class="card-body">
                         <div class="d-flex align-items-center mb-2 pb-1">
@@ -57,7 +57,7 @@
             </a>
         </div>
         <div class="col-sm-6 col-lg-2 mb-4">
-            <a href="#">
+            <a href="#" wire:click.prevent="setStep(4)">
                 <div class="card card-border-shadow-danger">
                     <div class="card-body">
                         <div class="d-flex align-items-center mb-2 pb-1">
@@ -73,7 +73,7 @@
             </a>
         </div>
         <div class="col-sm-6 col-lg-2 mb-4">
-            <a href="#">
+            <a href="#" wire:click.prevent="setStep(5)">
                 <div class="card card-border-shadow-success">
                     <div class="card-body">
                         <div class="d-flex align-items-center mb-2 pb-1">
@@ -89,7 +89,7 @@
             </a>
         </div>
         <div class="col-sm-6 col-lg-2 mb-4">
-            <a href="#">
+            <a href="#" wire:click.prevent="setStep(6)">
                 <div class="card card-border-shadow-secondary">
                     <div class="card-body">
                         <div class="d-flex align-items-center mb-2 pb-1">
@@ -117,7 +117,11 @@
                                 <button data-bs-toggle="modal" data-bs-target="#leads-form-modal"
                                     class="btn btn-primary">Create Leads</button>
                             </div>
-                            <div><input type="text" wire:model.live='search' placeholder="Search leads" class="form-control"></div>
+                            <div>
+                                <input type="text" wire:model.live='search' style="width: 400px;"
+                                    placeholder="Search leads" class="form-control">
+                              
+                            </div>
                         </div>
                     </div>
 
@@ -129,28 +133,40 @@
                             <th class="text-black">Code</th>
                             <th class="text-black">Leads name</th>
                             <th class="text-black">Company</th>
-                            <th class="text-black text-center">Assignee</th>
-                            <th class="text-black text-center">Leads start-expire</th>
-                            <th class="text-black text-center">Quotation Active Value</th>
+                            <th class="text-black ">Assignee</th>
+                            <th class="text-black ">Leads start</th>
+                            <th class="text-black ">Leads expire</th>
+                            @if (Auth::user()->is_admin == 1)
+                                <th class="text-black ">Delete</th>
+                            @endif
                         </tr>
                         @foreach ($leads as $lead)
-                        <tr>
-                            <td> {{ $lead->step_id }} </td>
-                            <td> <a href="{{ url('lead-form') }}">{{ $lead->code }}</a></td>
-                            <td>
+                            <tr>
+                                <td> {{ $lead->step?->step_name }} </td>
+                                <td> <a href="{{ url("lead-form/$lead->leads_id") }}"
+                                        target="_blank">{{ $lead->code }}</a></td>
+                                <td>
 
-                                <div style="color: black"> <a href="{{ url('lead-form') }}">{{ $lead->leads_name }} </a></div>
-                                <div class="text-warning"> [ {{ $lead->leads_detail }} ] </div>
+                                    <div style="color: black"> <a href="{{ url("lead-form/$lead->leads_id") }}"
+                                            target="_blank">{{ $lead->leads_name }} </a></div>
+                                    <div class="text-warning"> [ {{ $lead->leads_detail }} ] </div>
 
-                            </td>
-                            <td>{{ $lead->cus_id }}</td>
-                            <td class="text-center">{{ $lead->user_id }}</td>
-                            <td class="text-center">
-                                <span class="text-warning">{{ $lead->leads_start }}</span> <br>valid to<br>
-                                <span class="text-warning">{{ $lead->leads_expire }}</span>
-                            </td>
-                            <td class="text-center">0</td>
-                        </tr>
+                                </td>
+                                <td>{{ $lead->customer?->cus_name }}</td>
+                                <td class="">{{ $lead->user?->name }}</td>
+                                <td class="">
+                                    <span class="">{{ $lead->leads_start }}</span>
+                                </td>
+                                <td class="">
+                                    <span class="">{{ $lead->leads_expire }}</span>
+                                </td>
+                                @if (Auth::user()->is_admin == 1)
+                                    <td>
+                                        <button type="button" wire:click='delete({{ $lead->leads_id }})'
+                                            wire:confirm="Delete Leads ?" class="btn btn-danger">Delete</button>
+                                    </td>
+                                @endif
+                            </tr>
                         @endforeach
                     </table>
                     <div class="p-3">
@@ -165,5 +181,5 @@
         <!--/ On route vehicles Table -->
     </div>
     <livewire:crm.components.lead-create-modal>
-    <livewire:crm.components.toast-alert>
+        <livewire:crm.components.toast-alert>
 </div>

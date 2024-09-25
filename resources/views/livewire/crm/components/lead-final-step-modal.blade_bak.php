@@ -1,10 +1,9 @@
-<div>
-    <div wire:ignore.self class="modal fade" id="final-step-modal" tabindex="-1" aria-labelledby="final-step-modalLabel"
+<div wire:ignore.self class="modal fade" id="final-step-Modal" tabindex="-1" aria-labelledby="final-step-ModalLabel"
         aria-hidden="true">
         <div class="modal-dialog">
             <div class="modal-content">
                 <div class="modal-header">
-                    <h1 class="modal-title fs-5" id="final-step-modalLabel">ตั้งค่าการขายครั้งต่อไป
+                    <h1 class="modal-title fs-5" id="final-step-ModalLabel">ตั้งค่าการขายครั้งต่อไป
                     </h1>
                     <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
                 </div>
@@ -25,8 +24,8 @@
                                 </div>
                             </div>
                             <div class="mb-3 row" id="leads_start">
-                                <label for="staticEmail" class="col-sm-5 col-form-label">Leads start next due</label>
-                                <div class="col-sm-7">
+                                <label for="staticEmail" class="col-sm-3 col-form-label">Leads start</label>
+                                <div class="col-sm-9">
                                     <div class="mb-3">
                                         <input class="form-control datepicker" type="text" name="start"
                                             id="start" value="{{ date('Y-m-d') }}">
@@ -45,6 +44,4 @@
                 </div>
             </div>
         </div>
-
-    </div>   
-</div>
+    </div>

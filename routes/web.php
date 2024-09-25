@@ -33,7 +33,7 @@ Route::middleware('auth')->group(function () {
     Route::get('/setting', SettingForm::class);
 
     Route::get('/lead', LeadShow::class);
-    Route::get('/lead-form', LeadForm::class);
+    Route::get('/lead-form/{leads_id}', LeadForm::class);
 
     Route::get('/order', OrderShow::class);
     Route::get('/order-form', OrderForm::class);

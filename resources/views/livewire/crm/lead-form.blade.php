@@ -4,15 +4,20 @@
             <div class="card">
                 <div
                     class="card-header sticky-element bg-label-secondary d-flex justify-content-sm-between align-items-sm-center flex-column flex-sm-row">
-                    <h5 class="card-title mb-sm-0 me-2 text-uppercase  text-info">L670500001 - ( Lead name )</h5>
+                    <h5 class="card-title mb-sm-0 me-2 text-uppercase  ">{{ $leads->code }} - (
+                        {{ $leads->leads_name }} ) {{ $leads->step_id }}</h5>
                     <div class="dropdown ">
                         <button class="btn p-0" type="button" id="routeVehicles" data-bs-toggle="dropdown"
                             aria-haspopup="true" aria-expanded="false">
                             <i class="ti ti-dots-vertical"></i>
                         </button>
                         <div class="dropdown-menu dropdown-menu-end" aria-labelledby="routeVehicles">
-                            <a class="dropdown-item" href="javascript:void(0);">Assign To</a>
-                            <a class="dropdown-item" href="javascript:void(0);">ยกเลิกการติดตาม</a>
+                            <a class="dropdown-item" href="#" data-bs-toggle="modal"
+                                data-bs-target="#assign-to-modal">Assign To</a>
+                            @if ($leads->step_id < 6)
+                                <a class="dropdown-item" href="#" wire:confirm='ยกเลิกการติดตาม?'
+                                    wire:click.prevent='setCancle'>ยกเลิกการติดตาม</a>
+                            @endif
                             {{-- <a class="dropdown-item" href="javascript:void(0);">ติดป้ายกำกับ</a> --}}
                         </div>
                     </div>
@@ -23,17 +28,24 @@
                             <div class="d-flex justify-content-between">
                                 <div class="containerprogress">
                                     <ul class="progressbar">
-                                        <li class="active">ใหม่</li>
-                                        <li class="active">นำเสนอ</li>
-                                        <li class="active">เข้าพบ</li>
-                                        <li class="active">ต่อรอง</li>
-                                        <li class="">ปิดการขาย</li>
+
+                                        <li class="{{ $leads->step_id >= 1 ? 'active' : '' }}">ใหม่</li>
+                                        <li class="{{ $leads->step_id >= 2 ? 'active' : '' }}">นำเสนอ</li>
+                                        <li class="{{ $leads->step_id >= 3 ? 'active' : '' }}">เข้าพบ</li>
+                                        <li class="{{ $leads->step_id >= 4 ? 'active' : '' }}">ต่อรอง</li>
+                                        <li class="{{ $leads->step_id >= 5 ? 'active' : '' }}">ปิดการขาย</li>
                                     </ul>
                                 </div>
                                 <div>
-                                    <button @click="$dispatch('check-step',{leads_id:20})"
-                                        class="btn btn-info text-white " data-bs-toggle="modal"
-                                        data-bs-target="#final-step-Modal">Next step</button>
+                                    {{-- 
+                                    @click="$dispatch('check-step',{leads_id:20})" 
+                                    data-bs-toggle="modal"
+                                        data-bs-target="#final-step-Modal"
+                                    --}}
+                                    @if ($leads->step_id < 5)
+                                        <button wire:click='nextstep' class="btn btn-info text-white ">Next
+                                            step</button>
+                                    @endif
                                 </div>
                             </div>
                         </div>
@@ -48,11 +60,11 @@
                             <div class="row">
                                 <div class="col content-center">
                                     <small class="text-uppercase">Company NAME : </small>
-                                    <div class="fw-bold">Company xxx</div>
+                                    <div class="fw-bold">{{ $leads->customer->cus_name }}</div>
                                 </div>
                                 <div class="col content-center">
                                     <small class="text-uppercase">Address : </small>
-                                    <div class="fw-bold">999 pravet Bangkok 10200</div>
+                                    <div class="fw-bold">{{ $leads->customer->cus_address_th }}</div>
                                 </div>
                             </div>
                         </div>
@@ -65,15 +77,15 @@
                             <div class="row">
                                 <div class="col">
                                     <small class="text-uppercase">Assignee : </small>
-                                    <div class="fw-bold">Ms.xxx</div>
+                                    <div class="fw-bold">{{ $leads->user->name }}</div>
                                 </div>
                                 <div class="col">
                                     <small class="text-uppercase"> LEADS START :</small>
-                                    <div class="fw-bold"><?= date('Y-m-d') ?></div>
+                                    <div class="fw-bold">{{ $leads->leads_start }}</div>
                                 </div>
                                 <div class="col">
                                     <small class="text-uppercase">LEADS Expire :</small>
-                                    <div class="fw-bold"><?= date('Y-m-d') ?></div>
+                                    <div class="fw-bold">{{ $leads->leads_expire }}</div>
                                 </div>
                             </div>
                         </div>
@@ -87,19 +99,22 @@
                     <div class="row">
                         <div class="col">
                             <small class="text-uppercase">name : </small>
-                            <div class="fw-bold">คุณ ล่ำซำ</div>
+                            <div class="fw-bold">{{ $leads->customer->contact_name }}</div>
                         </div>
                         <div class="col">
                             <small class="text-uppercase">telephone : </small>
-                            <div class="fw-bold"><a href="tel:0123456789">0123456789</a></div>
+                            <div class="fw-bold"><a href="tel:0123456789">{{ $leads->customer->contact_telephone }}</a>
+                            </div>
                         </div>
                         <div class="col">
                             <small class="text-uppercase">line : </small>
-                            <div class="fw-bold"><a href="#">@idline</a></div>
+                            <div class="fw-bold">{{ $leads->customer->contact_line }}</div>
                         </div>
                         <div class="col">
                             <small class="text-uppercase">email : </small>
-                            <div class="fw-bold"><a href="mailto:email@domain.com">email@domain.com</a></div>
+                            <div class="fw-bold"><a
+                                    href="mailto:{{ $leads->customer->contact_email }}">{{ $leads->customer->contact_email }}</a>
+                            </div>
                         </div>
                     </div>
                 </div>
@@ -118,50 +133,52 @@
                         <div class="col-md-12">
                             <ul class="nav nav-tabs" id="myTab" role="tablist">
                                 <li class="nav-item" role="presentation">
-                                    <button class="text-uppercase nav-link active" id="carlendar-tab"
+                                    <button class="text-uppercase nav-link active" id="carlendarbtn"
                                         data-bs-toggle="tab" data-bs-target="#calendar_tab" type="button"
                                         role="tab" aria-controls="calendar_tab"
                                         aria-selected="true">Calendars</button>
                                 </li>
                                 <li class="nav-item" role="presentation">
-                                    <button class="text-uppercase nav-link" id="home-tab" data-bs-toggle="tab"
+                                    <button class="text-uppercase nav-link" id="generalbtn" data-bs-toggle="tab"
                                         data-bs-target="#general_tab" type="button" role="tab"
                                         aria-controls="general_tab" aria-selected="true">General memo</button>
                                 </li>
                                 <li class="nav-item" role="presentation">
-                                    <button class="text-uppercase nav-link" id="profile-tab" data-bs-toggle="tab"
+                                    <button class="text-uppercase nav-link" id="checkinbtn" data-bs-toggle="tab"
                                         data-bs-target="#checkin_tab" type="button" role="tab"
                                         aria-controls="checkin_tab" aria-selected="false">check in</button>
                                 </li>
                                 <li class="nav-item" role="presentation">
-                                    <button class="text-uppercase nav-link" id="contact-tab" data-bs-toggle="tab"
-                                        data-bs-target="#invoice_tab" type="button" role="tab"
-                                        aria-controls="invoice_tab" aria-selected="false">Quotation</button>
+                                    <button class="text-uppercase nav-link" id="quotationbtn" data-bs-toggle="tab"
+                                        data-bs-target="#quotation_tab" type="button" role="tab"
+                                        aria-controls="quotation_tab" aria-selected="false">Quotation</button>
                                 </li>
 
                             </ul>
                             <div class="tab-content" id="myTabContent">
                                 <div class="tab-pane fade show active" id="calendar_tab" role="tabpanel"
                                     aria-labelledby="home-tab" tabindex="0">
-                                    <form method="POST" action="" enctype="multipart/form-data">
+                                    <form method="POST" wire:submit='saveCalendar' action=""
+                                        enctype="multipart/form-data">
                                         <div class="mb-3 row">
                                             <label for="staticEmail" class="col-sm-2 col-form-label">Date</label>
                                             <div class="col-sm-10">
-                                                <input type="text" class="form-control" value=""
-                                                    placeholder="Date">
+                                                <input type="text" wire:model='calendar_date'
+                                                    class="form-control datepicker" value="" placeholder="Date"
+                                                    value="<?= date('Y-m-d') ?>">
                                             </div>
                                         </div>
                                         <div class="mb-3 row">
                                             <label for="staticEmail" class="col-sm-2 col-form-label">Detail</label>
                                             <div class="col-sm-10">
-                                                <textarea name="" class="form-control" placeholder="your message" id="" cols="30"
+                                                <textarea wire:model='calendar_detail' class="form-control" placeholder="your message" cols="30"
                                                     rows="2"></textarea>
                                             </div>
                                         </div>
                                         <div class="mb-3 row">
                                             <label for="staticEmail" class="col-sm-2 col-form-label"></label>
                                             <div class="col-sm-10">
-                                                <button type="submit" name="btnmemosave"
+                                                <button type="submit" name="btncalendarsave"
                                                     class="btn btn-success">SAVE</button>
                                             </div>
                                         </div>
@@ -172,32 +189,32 @@
                                                 <td>Date</td>
                                                 <td>Detail</td>
                                             </tr>
+                                            @foreach ($calendars as $calendar)
+                                                <tr>
+                                                    <td>
+                                                        {{ $calendar->calendar_date }}<br>
+                                                        <small>cby : {{ $calendar->cby }}</small>
+                                                    </td>
+                                                    <td>{{ $calendar->calendar_detail }}</td>
+                                                </tr>
+                                            @endforeach
                                             <tr>
-
-                                                <td>xxxxxx</td>
-                                                <td>xxxxxx</td>
+                                                <td colspan="3">
+                                                    {{ $calendars->links() }}
+                                                </td>
                                             </tr>
-                                            <tr>
 
-                                                <td>xxxxxx</td>
-                                                <td>xxxxxx</td>
-                                            </tr>
-                                            <tr>
-
-                                                <td>xxxxxx</td>
-                                                <td>xxxxxx</td>
-                                            </tr>
                                         </table>
                                     </div>
                                 </div>
                                 <div class="tab-pane fade" id="general_tab" role="tabpanel"
                                     aria-labelledby="home-tab" tabindex="0">
-                                    <form method="POST" action="" enctype="multipart/form-data">
+                                    <form method="POST" wire:submit='saveMemo' action=""
+                                        enctype="multipart/form-data">
                                         <div class="mb-3 row">
                                             <label for="staticEmail" class="col-sm-2 col-form-label">Memo</label>
                                             <div class="col-sm-10">
-                                                <textarea name="" class="form-control" placeholder="your message" id="" cols="30"
-                                                    rows="2"></textarea>
+                                                <textarea wire:model='memo_message' class="form-control" placeholder="your message" cols="30" rows="2"></textarea>
                                             </div>
                                         </div>
                                         <div class="mb-3 row">
@@ -222,22 +239,24 @@
                                             <tr>
                                                 <td>Date</td>
                                                 <td>Detail</td>
-                                                <td>attachment</td>
                                             </tr>
+                                            @foreach ($memos as $memo)
+                                                <tr>
+                                                    <td>
+                                                        {{ $memo->memo_timestamp }}<br>
+                                                        <small>cby : {{ $memo->cby }}</small>
+
+                                                    </td>
+                                                    <td>
+                                                        {{ $memo->memo_message }}<br>
+                                                        @if ($memo->originalfilename)
+                                                            Attachment : {{ $memo->originalfilename }}
+                                                        @endif
+                                                    </td>
+                                                </tr>
+                                            @endforeach
                                             <tr>
-                                                <td>xxxxxx</td>
-                                                <td>xxxxxx</td>
-                                                <td>xxxxxx</td>
-                                            </tr>
-                                            <tr>
-                                                <td>xxxxxx</td>
-                                                <td>xxxxxx</td>
-                                                <td>xxxxxx</td>
-                                            </tr>
-                                            <tr>
-                                                <td>xxxxxx</td>
-                                                <td>xxxxxx</td>
-                                                <td>xxxxxx</td>
+                                                <td colspan="3">{{ $memos->links() }}</td>
                                             </tr>
                                         </table>
                                     </div>
@@ -245,7 +264,8 @@
                                 <div class="tab-pane fade" id="checkin_tab" role="tabpanel"
                                     aria-labelledby="profile-tab" tabindex="0">
                                     <div class="text-center">
-                                        <img src="images/google.png" class="img-fluid" alt="">
+                                        <img src="{{ asset('images/google.png') }}" class="img-fluid"
+                                            alt="">
                                     </div>
                                     <div>
                                         <table class="table table-striped">
@@ -271,7 +291,7 @@
                                         </table>
                                     </div>
                                 </div>
-                                <div class="tab-pane fade" id="invoice_tab" role="tabpanel"
+                                <div class="tab-pane fade" id="quotation_tab" role="tabpanel"
                                     aria-labelledby="contact-tab" tabindex="0">
                                     <button class="btn btn-info mb-3">Create Quotation</button>
                                     <table class="table">
@@ -315,67 +335,39 @@
             </div>
         </div>
         <div class="col-4">
-            <div class="card">
-                <div class="card-header">
-                    <div class="row">
-                        <div class="col-md-5">
-                            <h5 class="card-title mb-sm-0 me-2 mt-2 text-uppercase  text-info">Activity Log</h5>
-                        </div>
-                        <div class="col-md-7">
-                            <div class="text-info">
-                                <input type="text" style="display: inline-block;" class="form-control"
-                                    placeholder="filter by date">
-                            </div>
-                        </div>
-                    </div>
-
-
-                </div>
-                <div class="card-body">
-                    <div class="row">
-                        <div style="height: 300px; overflow-y: auto;">
-                            <table class="mt-1 table table-striped ">
-                                @for ($i = 0; $i < 20; $i++)
-                                    <tr>
-                                        <td>
-                                            <div class="d-flex justify-content-between">
-                                                <div>
-                                                    <small class="text-warning"><?= date('Y-M-d D H:i:s') ?></small> :
-                                                    <br>
-                                                    <div>
-                                                        <a href="#"
-                                                            @click="$dispatch('show-log',{msg: 'message{{ $i }}'})"
-                                                            data-bs-toggle="modal"
-                                                            data-bs-target="#activityLogModal">Memo</a>
-
-                                                    </div>
-                                                </div>
-                                                <div style="width: 25px">
-                                                    @if ($i < 2)
-                                                        <i class="ti ti-pin"></i>
-                                                    @endif
-                                                </div>
-                                            </div>
-                                        </td>
-                                    </tr>
-                                @endfor
-
-                            </table>
-                        </div>
-
-                    </div>
-                </div>
-            </div>
+            <livewire:crm.components.lead-activity-log-show leads_id="{{ $this->leads_id }}" />
         </div>
     </div>
 
-    <livewire:crm.components.lead-final-step-modal>
+    <livewire:crm.components.lead-assign-to-modal />
+    <livewire:crm.components.lead-final-step-modal />
+    <livewire:crm.components.activity-log-modal />
+    <livewire:crm.components.toast-alert />
 
-    <livewire:crm.components.activity-log-modal>
+    <div x-data x-init="@this.on('leadschangtab', event => {
+        setTimeout(function() {
+            if (event.tab == 1) {
+                $('#carlendarbtn').click();
+            } else if (event.tab == 2) {
+                $('#generalbtn').click();
+            } else if (event.tab == 3) {
+                $('#checkinbtn').click();
+            } else {
+                $('#quotationbtn').click();
+            }
+        }, 100);
+    })"></div>
 
+    <div x-data x-init="@this.on('leads-final-step-open', event => {
+        
+       const myModal = new bootstrap.Modal(document.getElementById('final-step-modal'));
+        myModal.show();
+    
+    })"></div>
 </div>
+
 @push('scripts')
-    <script src="assets/vendor/libs/jquery-sticky/jquery-sticky.js"></script>
+    <script src="{{ asset('assets/vendor/libs/jquery-sticky/jquery-sticky.js') }}"></script>
     <script type="text/javascript">
         var topSpacing;
         const stickyEl = $('.sticky-element');
