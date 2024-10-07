@@ -149,11 +149,11 @@
                             <tr>
                                 <td> {{ $lead->step?->step_name }} </td>
                                 <td> <a href="{{ url("lead-form/$lead->leads_id") }}"
-                                        target="_blank">{{ $lead->code }}</a></td>
+                                        target="leaddetail">{{ $lead->code }}</a></td>
                                 <td>
 
                                     <div style="color: black"> <a href="{{ url("lead-form/$lead->leads_id") }}"
-                                            target="_blank">{{ $lead->leads_name }} </a></div>
+                                            target="leaddetail">{{ $lead->leads_name }} </a></div>
                                     <div class="text-warning"> [ {{ $lead->leads_detail }} ] </div>
 
                                 </td>

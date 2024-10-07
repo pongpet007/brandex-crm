@@ -15,7 +15,7 @@ window.events = [
   {
     id: 1,
     url: '',
-    title: 'Design Review',
+    title: 'Design Review fasdfsadf',
     start: date,
     end: nextDay,
     allDay: false,

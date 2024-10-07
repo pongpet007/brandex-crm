@@ -9,14 +9,14 @@
                     <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
                 </div>
                 <div class="modal-body">
-                    <form action="">
+                    <form wire:submit='save' action="">
                         <div class="p-3">
                             <div class="mb-3 row">
                                 <label for="staticEmail" class="col-sm-9 col-form-label">คุณต้องการสร้าง Leads
                                     เพื่อต่อสัญญาครั้งต่อไปหรือไม่</label>
                                 <div class="col-sm-3">
                                     <div class="mb-3">
-                                        <select id="continue_leads" onchange="checkconfirm()" class="form-control"
+                                        <select wire:model.live='continue_leads' class="form-control"
                                             name="continue_leads">
                                             <option value="1">Yes</option>
                                             <option value="2">No</option>
@@ -24,12 +24,14 @@
                                     </div>
                                 </div>
                             </div>
-                            <div class="mb-3 row" id="leads_start">
+
+                            <div class="mb-3 row {{ $this->continue_leads == 1 ? '' : 'd-none' }}" id="leads_start">
                                 <label for="staticEmail" class="col-sm-5 col-form-label">Leads start next due</label>
                                 <div class="col-sm-7">
                                     <div class="mb-3">
-                                        <input class="form-control datepicker" type="text" name="start"
-                                            id="start" value="{{ date('Y-m-d') }}">
+                                        <input wire:model='continue_start' class="form-control datepicker"
+                                            autocomplete="off" type="text" name="start" id="start"
+                                            >
                                     </div>
                                 </div>
                             </div>
@@ -40,11 +42,17 @@
                                         class="btn btn-success">ยืนยันปิดการขาย</button>
                                 </div>
                             </div>
+
                         </div>
                     </form>
                 </div>
             </div>
         </div>
+    </div>
 
-    </div>   
+    <div x-data x-init="@this.on('final-step-modal-close', event => {
+        var myModalEl = document.getElementById('final-step-modal');
+        var modal = bootstrap.Modal.getInstance(myModalEl)
+        modal.hide();
+    })"></div>
 </div>

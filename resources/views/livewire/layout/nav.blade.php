@@ -61,6 +61,7 @@ $logout = function (Logout $logout) {
                         <div data-i18n="Product">Product</div>
                     </a>
                 </li>
+                @if(Auth::user()->is_admin==1)
                 <li class="menu-item pe-5">
                     <a href="{{ url('users') }}" class="menu-link ">
                         <i class="menu-icon tf-icons ti ti-users-plus"></i>
@@ -73,6 +74,7 @@ $logout = function (Logout $logout) {
                         <div data-i18n="Setting">Setting</div>
                     </a>
                 </li>
+                @endif
             </ul>
         </div>
 

@@ -21,8 +21,7 @@
                                     @if (strlen($this->search_cus_name) >= 2)
                                         @if (count($customers) == 0)
                                             <div class="mt-3">
-                                                <a href="#" data-bs-toggle="modal"
-                                                    data-bs-target="#customer-form-modal">Create new customer</a>
+                                                <a href="{{ url('customer') }}">Create new customer</a>
                                             </div>
                                         @else
                                             <div style="position: relative;">
@@ -54,10 +53,12 @@
                             <div class="col-sm-9">
                                 <div class="mb-3">
                                     @if (Auth::user()->is_admin == 1)
-                                        <select wire:model.live='user_id' class="form-control">
+                                        <select wire:model='user_id' class="form-control">
                                             <option value="0">Select assignee</option>
                                             @foreach ($users as $user)
-                                                <option value="{{ $user->id }}">{{ $user->name }}</option>
+                                                <option value="{{ $user->id }}"
+                                                    >{{ $user->name }}
+                                                </option>
                                             @endforeach
                                         </select>
                                     @else
@@ -109,8 +110,7 @@
             </div>
         </div>
     </div>
-    <livewire:crm.components.customer-form-modal>
-
+    
         <div x-data x-init="@this.on('leads-modal-close', event => {
             var myModalEl = document.getElementById('leads-form-modal');
             var modal = bootstrap.Modal.getInstance(myModalEl)

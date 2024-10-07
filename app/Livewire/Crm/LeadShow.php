@@ -4,6 +4,7 @@ namespace App\Livewire\Crm;
 
 use App\Models\Leads;
 use Illuminate\Contracts\Database\Eloquent\Builder;
+use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\DB;
 use Livewire\Component;
 use Livewire\Attributes\Layout;
@@ -28,19 +29,41 @@ class LeadShow extends Component
 
     public function render()
     {
-        $countNew = Leads::where('step_id', '=', 1)->count();
-        $countPresent = Leads::where('step_id', '=', 2)->count();
-        $countMeet = Leads::where('step_id', '=', 3)->count();
-        $countNegotiate = Leads::where('step_id', '=', 4)->count();
-        $countFinish = Leads::where('step_id', '=', 5)->count();
-        $countCancle = Leads::where('step_id', '=', 6)->count();
+        $countNew = Leads::where('step_id', '=', 1)
+            ->when(Auth::user()->is_admin <> 1, function (Builder $query) {
+                $query->where('user_id', Auth::user()->id);
+            })->count();
+        $countPresent = Leads::where('step_id', '=', 2)
+            ->when(Auth::user()->is_admin <> 1, function (Builder $query) {
+                $query->where('user_id', Auth::user()->id);
+            })->count();
+        $countMeet = Leads::where('step_id', '=', 3)
+            ->when(Auth::user()->is_admin <> 1, function (Builder $query) {
+                $query->where('user_id', Auth::user()->id);
+            })->count();
+        $countNegotiate = Leads::where('step_id', '=', 4)
+            ->when(Auth::user()->is_admin <> 1, function (Builder $query) {
+                $query->where('user_id', Auth::user()->id);
+            })->count();
+        $countFinish = Leads::where('step_id', '=', 5)
+            ->when(Auth::user()->is_admin <> 1, function (Builder $query) {
+                $query->where('user_id', Auth::user()->id);
+            })->count();
+        $countCancle = Leads::where('step_id', '=', 6)
+            ->when(Auth::user()->is_admin <> 1, function (Builder $query) {
+                $query->where('user_id', Auth::user()->id);
+            })->count();
+
+            
 
         $leads = Leads::where(function (Builder $query) {
             $query->where('leads_name', 'like', "%$this->search%")
                 ->orWhere('code', 'like', "%$this->search%");
-        })->when($this->allstep<>1,function(Builder $query){
+        })->when($this->allstep <> 1, function (Builder $query) {
             $query->where('step_id', '=', $this->step_id);
-        })           
+        })->when(Auth::user()->is_admin <> 1, function (Builder $query) {
+            $query->where('user_id', Auth::user()->id);
+        })
             ->orderBy('leads_start', 'desc')
             ->paginate(10);
 

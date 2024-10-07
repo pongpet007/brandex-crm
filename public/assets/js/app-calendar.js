@@ -68,6 +68,7 @@ document.addEventListener('DOMContentLoaded', function () {
 
         return $badge;
       }
+      
       eventLabel.wrap('<div class="position-relative"></div>').select2({
         placeholder: 'Select value',
         dropdownParent: eventLabel.parent(),

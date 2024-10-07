@@ -2,6 +2,7 @@
 
 use App\Livewire\Crm\Calendar;
 use App\Livewire\Crm\ChangePasswordForm;
+use App\Livewire\Crm\Components\LeadInvoiceCreateModal;
 use App\Livewire\Crm\CustomerForm;
 use App\Livewire\Crm\CustomerShow;
 use App\Livewire\Crm\LeadForm;
@@ -51,6 +52,7 @@ Route::middleware('auth')->group(function () {
 
     Route::get('/users', UsersShow::class);
     Route::get('/users-form/{id}', UsersForm::class);
+   
     
 });
 
