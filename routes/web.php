@@ -1,5 +1,6 @@
 <?php
 
+use App\Http\Controllers\PDFController;
 use App\Livewire\Crm\Calendar;
 use App\Livewire\Crm\ChangePasswordForm;
 use App\Livewire\Crm\Components\LeadInvoiceCreateModal;
@@ -52,7 +53,11 @@ Route::middleware('auth')->group(function () {
 
     Route::get('/users', UsersShow::class);
     Route::get('/users-form/{id}', UsersForm::class);
-   
+    
+    // PDF
+    Route::get('/pdf',[PDFController::class,'pdf']);
+    Route::get('/quotationPdf/{quote_id}',[PDFController::class,'quotationPdf']);
+    Route::get('/invoicePdf/{invoice_id}',[PDFController::class,'invoicePdf']);
     
 });
 

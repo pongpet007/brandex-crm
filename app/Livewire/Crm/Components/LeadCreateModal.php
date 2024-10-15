@@ -79,7 +79,7 @@ class LeadCreateModal extends Component
         if ($this->cus_id > 0 && $this->user_id > 0) {
             $cus = Customers::find($this->cus_id);
             $usr = User::find($this->user_id);
-            $this->leads_name = "" . $cus->cus_name . ' - ' . $usr->name;
+            $this->leads_name = "" . $cus->cus_name . ' - ' . $usr->name;           
         }
 
         $customers = Customers::where('cus_name', 'like', "%$this->search_cus_name%")

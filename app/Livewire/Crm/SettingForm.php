@@ -19,6 +19,8 @@ class SettingForm extends Component
 
     public $taxid;
     public $companyname;
+    public $com_tel;
+    public $com_mobile;
     public $companyname_en;
     public $address;
     public $address_en;
@@ -30,6 +32,8 @@ class SettingForm extends Component
         $setting = Setting::find(1);
         $this->taxid = $setting->taxid;
         $this->companyname = $setting->companyname;
+        $this->com_tel = $setting->com_tel;
+        $this->com_mobile = $setting->com_mobile;
         $this->companyname_en = $setting->companyname_en;
         $this->address = $setting->address;
         $this->address_en = $setting->address_en;
@@ -50,6 +54,8 @@ class SettingForm extends Component
 
         $setting->taxid = $this->taxid;
         $setting->companyname = $this->companyname;
+        $setting->com_tel = $this->com_tel;
+        $setting->com_mobile = $this->com_mobile;
         $setting->companyname_en = $this->companyname_en;
         $setting->address = $this->address;
         $setting->address_en = $this->address_en;
@@ -59,8 +65,7 @@ class SettingForm extends Component
         
         // $valid = $this->validate([
         //     'logo' => 'mimes:png',
-        // ]);     
-      
+        // ]);           
 
         if ($this->logo) {
             $this->logo->storeAs('logo', 'logo.png');

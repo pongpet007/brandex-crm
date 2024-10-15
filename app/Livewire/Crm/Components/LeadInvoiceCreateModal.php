@@ -7,18 +7,29 @@ use App\Models\Leads;
 use App\Models\Products;
 use App\Models\Quotation;
 use App\Models\QuotationItem;
+use App\Models\QuoteType;
 use App\Models\Setting;
+use App\Models\User;
 use Illuminate\Support\Facades\Auth;
 use Livewire\Attributes\Layout;
 use Livewire\Attributes\On;
+use Livewire\Attributes\Validate;
 use Livewire\Component;
+use Livewire\WithFileUploads;
 
 class LeadInvoiceCreateModal extends Component
 {
-    public $quote_id = 0;
+    use WithFileUploads;
+
+    #[Validate('mimes:png|max:1024')]
+    public $filereplace;
+
+    public $quote_id = 1;
     public $leads_id;
     public $com_name;
     public $com_address;
+    public $com_tel;
+    public $com_mobile;
     public $logo = 'logo/logo.png';
     public $taxid;
 
@@ -31,11 +42,13 @@ class LeadInvoiceCreateModal extends Component
 
     public $code;
     public $user_id;
-    public $qoute_type;
+    public $quote_type;
     public $discount = 0;
     public $quotation_status;
-
     public $pro_id;
+    public $iseditheader = false;
+    public $iseditmode1 = false;
+    public $iseditmode2 = false;
 
 
     #[On('add-quotation')]
@@ -45,22 +58,28 @@ class LeadInvoiceCreateModal extends Component
         $setting = Setting::find(1);
         $this->com_name = $setting->companyname;
         $this->com_address = $setting->address;
+        $this->com_tel = $setting->com_tel;
+        $this->com_mobile = $setting->com_mobile;
         $this->taxid = $setting->taxid;
+
         $leads = Leads::find($this->leads_id);
 
         $this->cus_id = $leads->cus_id;
         $this->cus_name = $leads->customer->contact_name;
         $this->cus_company = $leads->customer->cus_name;
-        $this->cus_address = $leads->customer->cus_address_th;
+        // $this->cus_address = $leads->customer->cus_address_th;
         $this->cus_tel = $leads->customer->contact_telephone;
         $this->cus_mobile = $leads->customer->contact_mobile;
         $this->user_id = $leads->user_id;
-        $this->qoute_type = 1;
+        $this->quote_type = 1;
         $this->quotation_status = 2;
+        $this->logo = 'logo/logo.png';
 
         $quotation = Quotation::create([
             'com_name' => $this->com_name,
             'com_address' => $this->com_address,
+            'com_tel' => $this->com_tel,
+            'com_mobile' => $this->com_mobile,
             'logo' => $this->logo,
             'taxid' => $this->taxid,
             'leads_id' => $this->leads_id,
@@ -71,7 +90,7 @@ class LeadInvoiceCreateModal extends Component
             'cus_tel' => $this->cus_tel,
             'cus_mobile' => $this->cus_mobile,
             'user_id' => $this->user_id,
-            'qoute_type' => $this->qoute_type,
+            'quote_type' => $this->quote_type,
             'quotation_status' => $this->quotation_status,
             'y' => date('y'),
             'm' => date('m'),
@@ -104,6 +123,62 @@ class LeadInvoiceCreateModal extends Component
     {
         $this->quote_id = $quote_id;
     }
+    public function editheader()
+    {
+        $this->iseditheader =  !$this->iseditheader;
+    }
+
+    public function saveheader()
+    {
+        $quotation = Quotation::find($this->quote_id);
+     
+        if ($this->filereplace) {
+            $this->logo = $this->filereplace->store('/storage/logo');
+            $quotation->logo = $this->logo;
+        }
+     
+        $quotation->com_name = $this->com_name;
+        $quotation->com_address = $this->com_address;
+        $quotation->com_tel = $this->com_tel;
+        $quotation->com_mobile = $this->com_mobile;
+        $quotation->taxid = $this->taxid;
+        $quotation->save();
+        
+        $this->iseditheader = false;
+    }
+
+    public function editmode1()
+    {
+        $this->iseditmode1 =  !$this->iseditmode1;
+    }
+
+    public function editmode2()
+    {
+        $this->iseditmode2 =  !$this->iseditmode2;
+    }
+
+    public function savemode1()
+    {
+        $quotation = Quotation::find($this->quote_id);
+        $quotation->cus_name = $this->cus_name;
+        $quotation->cus_company = $this->cus_company;
+        $quotation->cus_address = $this->cus_address;
+        $quotation->cus_tel = $this->cus_tel;
+        $quotation->cus_mobile = $this->cus_mobile;
+        $quotation->save();
+        $this->iseditmode1 =  false;
+    }
+
+    public function savemode2()
+    {
+        $quotation = Quotation::find($this->quote_id);
+        $quotation->user_id = $this->user_id;
+        $quotation->quote_type = $this->quote_type;
+        $quotation->save();
+
+        $this->iseditmode2 =  false;
+    }
+
 
     public function addItem()
     {
@@ -134,10 +209,10 @@ class LeadInvoiceCreateModal extends Component
     public function deleteitem($quote_item_id)
     {
 
-        $quotation = QuotationItem::find($quote_item_id);
-        $quotation->delete();
+        $QuotationItem = QuotationItem::find($quote_item_id);
+        $QuotationItem->delete();
 
-        $code = $quotation->quote->code;
+        $code = $QuotationItem->quote->code;
         $msg = $code . " :  modified (delete item). ";
         ActivityLog::create([
             'log_message' => $msg,
@@ -152,25 +227,28 @@ class LeadInvoiceCreateModal extends Component
 
     public function render()
     {
-        if ($this->quote_id > 0) {
-            $quotation = Quotation::find($this->quote_id);
-            $this->com_name = $quotation->com_name;
-            $this->com_address = $quotation->com_address;
-            $this->logo = $quotation->logo;
-            $this->taxid = $quotation->taxid;
-            $this->cus_name = $quotation->cus_name;
-            $this->cus_company = $quotation->cus_company;
-            $this->cus_address = $quotation->cus_address;
-            $this->cus_tel = $quotation->cus_tel;
-            $this->cus_mobile = $quotation->cus_mobile;
-            $this->code = $quotation->code;
-            $this->user_id = $quotation->user_id;
-            $this->qoute_type = $quotation->qoute_type;
-            $this->quotation_status = $quotation->quotation_status;
-        }
+        $quotation = Quotation::find($this->quote_id);
+        $this->com_name = $quotation->com_name;
+        $this->com_address = $quotation->com_address;
+        $this->com_tel = $quotation->com_tel;
+        $this->com_mobile = $quotation->com_mobile;
+        $this->logo = $quotation->logo;
+        $this->taxid = $quotation->taxid;
+        $this->cus_name = $quotation->cus_name;
+        $this->cus_company = $quotation->cus_company;
+        $this->cus_address = $quotation->cus_address;
+        $this->cus_tel = $quotation->cus_tel;
+        $this->cus_mobile = $quotation->cus_mobile;
+        $this->code = $quotation->code;
+        $this->user_id = $quotation->user_id;
+        $this->quote_type = $quotation->quote_type;
+        $this->quotation_status = $quotation->quotation_status;
+
 
         $products = Products::where('is_active', 1)->orderBy('pro_name', 'asc')->get();
         $quotationItems = QuotationItem::where('quote_id', $this->quote_id)->get();
-        return view('livewire.crm.components.lead-invoice-create-modal', compact('products', 'quotationItems'));
+        $users = User::orderBy('name')->get();
+        $quote_types = QuoteType::all();
+        return view('livewire.crm.components.lead-invoice-create-modal', compact('quotation', 'products', 'quotationItems', 'users', 'quote_types'));
     }
 }

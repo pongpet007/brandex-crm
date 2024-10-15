@@ -24,6 +24,8 @@ class Setting extends Model
     protected $fillable = [
         'taxid',
         'companyname',
+        'com_tel',
+        'com_mobile',
         'address',
         'leadsowner',        
         'timereturn',        

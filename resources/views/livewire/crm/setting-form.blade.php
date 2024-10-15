@@ -58,6 +58,20 @@
                                     </div>
                                 </div> --}}
                                 <div class="mb-3 row">
+                                    <label for="inputtext" class="col-sm-4 col-form-label">Telephone </label>
+                                    <div class="col-sm-8">
+                                        <input type="text" wire:model='com_tel' class="form-control"
+                                            id="inputtext">
+                                    </div>
+                                </div>
+                                <div class="mb-3 row">
+                                    <label for="inputtext" class="col-sm-4 col-form-label">Mobile </label>
+                                    <div class="col-sm-8">
+                                        <input type="text" wire:model='com_mobile' class="form-control"
+                                            id="inputtext">
+                                    </div>
+                                </div>
+                                <div class="mb-3 row">
                                     <label for="inputtext" class="col-sm-4 col-form-label">Logo</label>
                                     <div class="col-sm-8">
                                         <img src="{{ asset('logo/logo.png') }}?{{rand()}}" class="img-fluid">

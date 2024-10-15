@@ -1,4 +1,4 @@
-<div wire:ignore.self class="modal fade" id="leads-form-modal" tabindex="-1" aria-labelledby="leads-form-modalLabel"
+<div wire:ignore.self class="modal fade modal-lg" id="leads-form-modal" tabindex="-1" aria-labelledby="leads-form-modalLabel"
     aria-hidden="true">
     <div class="modal-dialog">
         <div class="modal-content">
@@ -53,7 +53,7 @@
                             <div class="col-sm-9">
                                 <div class="mb-3">
                                     @if (Auth::user()->is_admin == 1)
-                                        <select wire:model='user_id' class="form-control">
+                                        <select wire:model.live='user_id' class="form-control">
                                             <option value="0">Select assignee</option>
                                             @foreach ($users as $user)
                                                 <option value="{{ $user->id }}"

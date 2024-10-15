@@ -229,7 +229,7 @@
                                                         {{ $memo->memo_message }}<br>
                                                         @if ($memo->originalfilename)
                                                         <i class="ti ti-paperclip"></i> :
-                                                            <a href="{{ url($memo->filename) }}" download="">
+                                                            <a href="{{ url($memo->filename) }}" download="{{ $memo->originalfilename }}">
                                                                 {{ $memo->originalfilename }}
                                                             </a>
                                                         @endif
