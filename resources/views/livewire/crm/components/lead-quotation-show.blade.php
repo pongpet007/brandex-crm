@@ -17,16 +17,17 @@
                     <a href="#" wire:click="$dispatch('edit-quotation', { quote_id: {{ $quotation->quote_id }} })"
                         data-bs-toggle="modal" data-bs-target="#leads-invoice-create-modal"
                         class="btn btn-sm btn-info">Detail</a>
-                    <a href="{{ url("/quotationPdf/$quotation->quote_id") }}" target="pdf{{ $quotation->quote_id }}"
-                        class="btn btn-sm btn-warning">PDF</a>
+
                     @if ($quotation->is_active == 1)
+                        <a href="{{ url("/quotationPdf/$quotation->quote_id") }}" target="pdf{{ $quotation->quote_id }}"
+                            class="btn btn-sm btn-warning">PDF</a>
                         <button type="button" wire:confirm=' set to inactive ?'
                             wire:click='setinactive({{ $quotation->quote_id }})' class="btn btn-sm btn-success">set
                             inactive</button>
                     @else
                         <button type="button" wire:confirm=' set to active ?'
                             wire:click='setactive({{ $quotation->quote_id }})' class="btn btn-sm btn-danger">set
-                            cctive</button>
+                            active</button>
                     @endif
 
                 </td>

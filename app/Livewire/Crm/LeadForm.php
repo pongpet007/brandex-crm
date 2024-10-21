@@ -19,7 +19,7 @@ use Livewire\WithPagination;
 class LeadForm extends Component
 {
     use WithPagination, WithoutUrlPagination;
-    
+
     public $leads_id;
     public $tab_id = 1;
     public $calendar_date;
@@ -41,7 +41,7 @@ class LeadForm extends Component
         $calendars = $leads->calendars()->orderBy('calendar_date', 'desc')->paginate(5, pageName: 'calendar-page');
         $memos = $leads->memos()->orderBy('memo_timestamp', 'desc')->paginate(5, pageName: 'memo-page');
         $logs = $leads->activityLogs()->orderBy('log_timestamp', 'desc')->paginate(5, pageName: 'log-page');
-        return view('livewire.crm.lead-form', compact('leads', 'calendars', 'memos'));
+        return view('livewire.crm.lead-form', compact('leads', 'calendars', 'memos'))->title($leads->code . ' - ' . $leads->leads_name);
     }
 
     public function savetitle()

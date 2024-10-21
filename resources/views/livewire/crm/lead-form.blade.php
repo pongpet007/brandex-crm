@@ -33,10 +33,10 @@
                             </button>
                             <div class="dropdown-menu dropdown-menu-end" aria-labelledby="routeVehicles">
                                 <a class="dropdown-item" href="#" data-bs-toggle="modal"
-                                    data-bs-target="#assign-to-modal">Assign assignee to</a>
+                                    data-bs-target="#assign-to-modal">กำหนดผู้รับผิดชอบใหม่</a>
                                 @if ($leads->step_id < 6)
                                     <a class="dropdown-item" href="#" wire:confirm='ยกเลิกการติดตาม?'
-                                        wire:click.prevent='setCancle'>Unfollow</a>
+                                        wire:click.prevent='setCancle'>เลิกติดตาม</a>
                                 @endif
                                 {{-- <a class="dropdown-item" href="javascript:void(0);">ติดป้ายกำกับ</a> --}}
                             </div>

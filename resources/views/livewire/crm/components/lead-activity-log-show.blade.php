@@ -23,17 +23,18 @@
                             <td>
                                 <div class="d-flex justify-content-between">
                                     <div>
-                                        <small class="text-warning">
+                                        <small class="">
                                             {{ $log->log_timestamp }} :
                                             {{ $log->cby }}
                                         </small>
 
-                                        <div>
-                                            <a href="#"
+                                        <div class="text-warning">
+                                            {!! $log->log_message !!}
+                                            {{-- <a href="#"
                                                 @click="$dispatch('show-log',{msg: '{{ $log->log_message }}'})"
                                                 data-bs-toggle="modal"
                                                 data-bs-target="#activityLogModal">{!! $log->log_message !!}
-                                            </a>
+                                            </a> --}}
                                         </div>
                                     </div>
                                     @if(false)

@@ -236,7 +236,7 @@ $logout = function (Logout $logout) {
                 </li>
                 <!-- Quick links --> --}}
 
-                <!-- Notification -->
+                {{-- <!-- Notification -->
                 <li class="nav-item dropdown-notifications navbar-dropdown dropdown me-3 me-xl-1">
                     <a class="nav-link dropdown-toggle hide-arrow" href="javascript:void(0);" data-bs-toggle="dropdown"
                         data-bs-auto-close="outside" aria-expanded="false">
@@ -276,7 +276,7 @@ $logout = function (Logout $logout) {
                                         </div>
                                     </div>
                                 </li>
-                                {{-- <li class="list-group-item list-group-item-action dropdown-notifications-item">
+                                <li class="list-group-item list-group-item-action dropdown-notifications-item">
                                     <div class="d-flex">
                                         <div class="flex-shrink-0 me-3">
                                             <div class="avatar">
@@ -450,7 +450,7 @@ $logout = function (Logout $logout) {
                                                     class="ti ti-x"></span></a>
                                         </div>
                                     </div>
-                                </li> --}}
+                                </li> 
                             </ul>
                         </li>
                         <li class="dropdown-menu-footer border-top">
@@ -462,7 +462,7 @@ $logout = function (Logout $logout) {
                     </ul>
                 </div>
                 </li>
-                <!--/ Notification -->
+                <!--/ Notification --> --}}
 
                 <!-- User -->
                 <li class="nav-item navbar-dropdown dropdown-user dropdown">
