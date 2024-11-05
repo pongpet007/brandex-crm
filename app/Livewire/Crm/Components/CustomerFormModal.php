@@ -56,7 +56,8 @@ class CustomerFormModal extends Component
             'contact_ig' => $this->contact_ig,
             'contact_facebook' => $this->contact_facebook,
             'cby' => Auth::user()->name,
-        ];
+        ];        
+        
         Customers::create($customer);
         
         $msg = "Customer saved.";

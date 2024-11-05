@@ -33,15 +33,13 @@
                             <div class="mb-3 row">
                                 <label for="staticEmail" class="col-form-label">E-mail</label>
                                 <div class="">
-                                    <input type="text" class="form-control" wire:model='cus_email' name="fileattach"
-                                        id="fileattach" />
+                                    <input type="text" class="form-control" wire:model='cus_email' />
                                 </div>
                             </div>
                             <div class="mb-3 row">
                                 <label for="staticEmail" class="col-form-label">Website</label>
                                 <div class="">
-                                    <input type="text" class="form-control" wire:model='cus_website'
-                                        name="fileattach" id="fileattach" />
+                                    <input type="text" class="form-control" wire:model='cus_website' />
                                 </div>
                             </div>
                         </div>
